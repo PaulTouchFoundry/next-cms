@@ -1,0 +1,13 @@
+{
+    "name": "wearenext/next-cms",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Wearenext\\CMS\\": "./src"
+        }
+    },
+    "require": {
+        "webonyx/graphql-php": "^0.7.2",
+        "proai/laravel-handlebars": "^1.3"
+    }
+}
