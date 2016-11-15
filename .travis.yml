@@ -1,0 +1,14 @@
+language: php
+php:
+- 5.6
+before_script:
+- composer config -g github-oauth.github.com ${GH_TOKEN}
+- composer install
+script:
+- php -l -d display_errors=0 src/
+- vendor/bin/phpcs -n --extensions=php --ignore='src/Database/Migrations' --standard=PSR2 --report=full src/
+notifications:
+  slack: wearenext:eukGbLuGciAoymXC4COwqkNo
+env:
+  global:
+    secure: SZZYI7V39tiUEtb9nmI13u+lrv+VyE6k5kd00WMa+BUsU39P4dnrB+Gv2atR+1/OrGqO6nIcSjJ8USYC9vNKB+pgfmT6jQcncw9Dw+YJK3CEDi/lKrZd7nEfr4z3dfUNXm45TrXHbcgou/MhpAJBaXmwEHcZd3JUNjtiinkrY+A=
