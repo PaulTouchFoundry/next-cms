@@ -8,7 +8,8 @@
     },
     "require": {
         "webonyx/graphql-php": "^0.7.2",
-        "laravel/framework": "5.1.*"
+        "laravel/framework": "5.1.*",
+        "cloudinary/cloudinary_php": "^1.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.3"

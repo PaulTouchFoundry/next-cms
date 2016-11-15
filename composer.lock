@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f6515ffaa1244fb1179a283fa77a060b",
-    "content-hash": "cc2c60fb8d2a5e6934880388b657a238",
+    "hash": "5339ebbe3cc60215dd799783bb3c25b3",
+    "content-hash": "121aaf69fc6687e8280f6f225bd9aaac",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -60,6 +60,58 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "cloudinary/cloudinary_php",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cloudinary/cloudinary_php.git",
+                "reference": "327f2db5767ceb8a19d51785e1b60e86674a6a2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/327f2db5767ceb8a19d51785e1b60e86674a6a2e",
+                "reference": "327f2db5767ceb8a19d51785e1b60e86674a6a2e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ],
+                "files": [
+                    "src/Helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cloudinary",
+                    "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
+                }
+            ],
+            "description": "Cloudinary PHP SDK",
+            "homepage": "https://github.com/cloudinary/cloudinary_php",
+            "keywords": [
+                "cdn",
+                "cloud",
+                "cloudinary",
+                "image management",
+                "sdk"
+            ],
+            "time": "2016-10-27 22:02:47"
         },
         {
             "name": "danielstjules/stringy",
