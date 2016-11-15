@@ -12,7 +12,7 @@ abstract class BaseType extends ObjectType
         parent::__construct($this->getDefinition());
     }
     
-    protected abstract function getDefinition();
+    abstract protected function getDefinition();
     
     /**
      * Magic function that does all the work
@@ -20,7 +20,7 @@ abstract class BaseType extends ObjectType
      */
     protected function resolveFunc()
     {
-        return function($value, $args, $context, ResolveInfo $info) {
+        return function ($value, $args, $context, ResolveInfo $info) {
             if (method_exists($this, $info->fieldName)) {
                 return $this->{$info->fieldName}($value, $args, $context, $info);
             } else {
