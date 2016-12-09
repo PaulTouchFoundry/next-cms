@@ -102,8 +102,8 @@ class ServiceProvider extends BaseProvider
             '</div>';
         });
 
-        $this->mergeConfigFrom($this->relative('/config/cms.php'), 'cms');
-        $this->mergeConfigFrom($this->relative('/config/services.php'), 'services');
+        $this->mergeConfigFrom($this->relative('/Config/cms.php'), 'cms');
+        $this->mergeConfigFrom($this->relative('/Config/services.php'), 'services');
     }
 
     public function provides()
