@@ -6,7 +6,7 @@ return [
     ],
     'brand' => [
         'color' => '#737373',
-        'title' => 'Wearenext CMS',
+        'title' => 'Wearenext-CMS',
     ],
     'features' => [
         'page_hero' => Wearenext\CMS\Models\Features\Hero::class,
