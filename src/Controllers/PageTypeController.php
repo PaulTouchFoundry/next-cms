@@ -42,7 +42,7 @@ class PageTypeController extends BaseController
     
     public function save(PageTypeRequest $request)
     {
-        $this->authorize('cms.pagetype_edit');
+        $this->authorize('cms.pagetype_save');
         
         $pageType = PageType::create($request->all());
         return redirect()
@@ -52,7 +52,7 @@ class PageTypeController extends BaseController
     
     public function update(PageTypeRequest $request, $pageType)
     {
-        $this->authorize('cms.pagetype_update');
+        $this->authorize('cms.pagetype_edit');
         
         $attributes = $request->all();
         $attributes['features'] = array_get($attributes, 'features', []);
