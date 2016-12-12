@@ -67,6 +67,8 @@ class UserController extends BaseController
         ]);
         
         $attributes = $request->all();
+        
+        $attributes['password'] = bcrypt($attributes['password']);
 
         $model = config('auth.model');
         $user = $model::create($attributes);
@@ -96,7 +98,6 @@ class UserController extends BaseController
             'name' => 'required',
             'email' => 'required|unique:users,email,'. $user->id,
             'cms_role' => 'required|in:'. implode(',', array_keys($this->roles())),
-            'password' => 'required',
         ]);
         
         $user->fill($request->all());
