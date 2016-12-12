@@ -19,6 +19,12 @@ class PageType extends BaseModel
         'blocks' => 'array',
     ];
     
+    protected $attributes = [
+        'features' => '[]',
+        'fields' => '[]',
+        'blocks' => '[]',
+    ];
+    
     public function pages()
     {
         return $this->hasMany(Page::class);

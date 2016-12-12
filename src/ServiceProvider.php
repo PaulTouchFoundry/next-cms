@@ -10,6 +10,7 @@ use Illuminate\Routing\Router;
 use Wearenext\CMS\Models\PageType;
 use Collective\Html\HtmlBuilder;
 use Wearenext\CMS\Support\Html\FormBuilder;
+use Wearenext\CMS\Support\Html\Form;
 
 class ServiceProvider extends BaseProvider
 {
@@ -48,7 +49,11 @@ class ServiceProvider extends BaseProvider
         
         // Translations
         $this->loadTranslationsFrom($this->relative('/Resources/lang'), 'cms');
-        
+
+        $view->composer('cms::*.view', function ($view) {
+            $view->with('searchForm', (new Form(request()->only([ 'q' ]))));
+        });
+
         // Cloudinary creds
         Cloudinary::config($this->app['config']->get('services.cloudinary'));
         
