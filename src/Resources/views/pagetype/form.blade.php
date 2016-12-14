@@ -82,18 +82,18 @@
             <legend class="legend">@lang('cms::pagetype.fields.page_relationship.label')</legend>
             <div class="row">
                 <div class="col col-1-2">
-                    <label class="{{ $form->field('relationship.name')->labelClass() }}" for="relationship-name">
+                    <label class="{{ $form->field('relations.0.label')->labelClass() }}" for="relationship-name">
                         <span class="u-visuallyhidden">@lang('cms::pagetype.fields.page_relationship_name.label')</span>
-                        <input class="input" type="text" id="relationship-name" name="page_relationship_name" maxlength="50" placeholder="@lang('cms::pagetype.fields.page_relationship_name.placeholder')" />
+                        <input class="input" type="text" id="relationship-name" name="relations[0][label]" maxlength="50" placeholder="@lang('cms::pagetype.fields.page_relationship_name.placeholder')" value="{{ $form->field('relations.0.label')->value() }}" />
                         {!! $form->field('relationship.name')->helpHtml() !!}
                     </label>
                 </div>
                 <div class="col col-1-2">
                     <label class="label" for="relationship-page">
                         <span class="u-visuallyhidden">@lang('cms::pagetype.fields.page_relationship_related.label')</span>
-                        <select id="relationship-page" name="relationship-page" class="input input--select">
+                        <select id="relationship-page" name="relations[0][pagetype_id]" class="input input--select">
                             @foreach (Wearenext\CMS\Models\PageType::all() as $entry)
-                            <option value="{{ $entry->id }}"{!! $form->field('relationship.related_page_id')->selected($entry->id) !!}>{{ $entry->label }}</option>
+                            <option value="{{ $entry->id }}"{!! $form->field('relations.0.pagetype_id')->selected($entry->id) !!}>{{ $entry->label }}</option>
                             @endforeach
                         </select>
                     </label>

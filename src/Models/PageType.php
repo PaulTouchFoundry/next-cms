@@ -11,18 +11,21 @@ class PageType extends BaseModel
         'features',
         'fields',
         'blocks',
+        'relations',
     ];
     
     protected $casts = [
         'features' => 'array',
         'fields' => 'array',
         'blocks' => 'array',
+        'relations' => 'array',
     ];
     
     protected $attributes = [
         'features' => '[]',
         'fields' => '[]',
         'blocks' => '[]',
+        'relations' => '[]',
     ];
     
     public function pages()
@@ -43,6 +46,11 @@ class PageType extends BaseModel
     public function setBlocksAttribute($values)
     {
         $this->attributes['blocks'] = json_encode($this->setArrayAttribute($values));
+    }
+    
+    public function setRelationsAttribute($values)
+    {
+        $this->attributes['relations'] = json_encode($this->setArrayAttribute($values));
     }
     
     public function scopeSlug($query, $slug)

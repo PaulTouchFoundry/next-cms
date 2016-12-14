@@ -119,4 +119,8 @@ class Page extends BaseModel
         $type = $this->type;
         return route('cms.block.index', [ 'cmsType' => $type->slug, 'cmsPage' => $this ]);
     }
+    
+    public function relatedPages() {
+        return $this->hasMany(PageRelation::class);
+    }
 }

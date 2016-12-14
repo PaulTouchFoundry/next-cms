@@ -4,6 +4,8 @@ namespace Wearenext\CMS\Controllers;
 
 use Illuminate\Http\Request;
 use Wearenext\CMS\Models\PageType;
+use Wearenext\CMS\Models\Page;
+use Wearenext\CMS\Models\PageRelation;
 use Wearenext\CMS\Support\Html\Form;
 
 class PageController extends BaseController
@@ -40,7 +42,8 @@ class PageController extends BaseController
         $form = new Form;
         return view('cms::page.create')
             ->with('type', $type)
-            ->with('form', $form);
+            ->with('form', $form)
+            ->with('relations', $this->relations($type));
     }
     
     public function edit(Request $request, $type, $page)
@@ -51,7 +54,8 @@ class PageController extends BaseController
         return view('cms::page.edit')
             ->with('type', $type)
             ->with('page', $page)
-            ->with('form', $form);
+            ->with('form', $form)
+            ->with('relations', $this->relations($type, $page));
     }
 
     public function save(Request $request, $type)
@@ -74,6 +78,7 @@ class PageController extends BaseController
         $this->fillFeatures(array_keys($type->features), $page, $attributes);
 
         $this->paths(array_values($request->get('paths', [])), $page);
+        $this->saveRelations($request->get('related_page', []));
 
         return redirect()
             ->to($page->blockUrl())
@@ -100,6 +105,9 @@ class PageController extends BaseController
         $this->fillFeatures(array_keys($type->features), $page, $attributes);
 
         $this->paths(array_values($request->get('paths', [])), $page);
+        
+        $page->relatedPages()->forceDelete();
+        $this->saveRelations($request->get('related_page', []));
 
         $page->save();
 
@@ -185,5 +193,51 @@ class PageController extends BaseController
             }
             $page->urls()->create(['url' => $path,]);
         }
+    }
+    
+    protected function saveRelations($relations)
+    {
+        foreach ($relations as $relation) {
+            $decoded = json_decode($relation, true);
+            if (is_array($decoded)) {
+                PageRelation::create($decoded);
+            }
+        }
+    }
+    
+    protected function relations(PageType $type, Page $page = null)
+    {
+        $pages = [];
+        
+        foreach ($type->relations as $r) {
+            $relatedType = PageType::find($r['pagetype_id']);
+            if (!isset($pages[$relatedType->id])) {
+                $pages[$relatedType->id] = ['label' => $r['label'], 'pages' => [],];
+            }
+            
+            foreach ($relatedType->pages as $p) {
+                $pages[$relatedType->id]['pages'][$p->id] = [
+                    'name' => $p->name,
+                    'selected' => false,
+                ];
+            }
+        }
+        
+        if (is_null($page)) {
+            return $pages;
+        }
+        
+        foreach ($page->relatedPages as $p) {
+            if (!isset($pages[$p->related_pagetype_id])) {
+                continue;
+            }
+            
+            if (!isset($pages[$p->related_pagetype_id]['pages'][$p->related_page_id])) {
+                continue;
+            }
+            $pages[$p->related_pagetype_id]['pages'][$p->related_page_id]['selected'] = true;
+        }
+        
+        return $pages;
     }
 }

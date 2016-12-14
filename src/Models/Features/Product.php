@@ -2,8 +2,8 @@
 
 namespace Wearenext\CMS\Models\Features;
 
-use Wearenext\DFS\Models\BaseModel;
-use Wearenext\DFS\Models\Page;
+use Wearenext\CMS\Models\BaseModel;
+use Wearenext\CMS\Models\Page;
 
 class Product extends BaseModel
 {

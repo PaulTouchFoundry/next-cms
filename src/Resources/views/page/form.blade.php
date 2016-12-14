@@ -70,6 +70,27 @@
         @endif
     </div>
 </div>
+
+@unless (!count($relations))
+<div class="l-section">
+    <div class="l-content">
+        @foreach ($relations as $pageTypeID => $value)
+        <fieldset class="fieldset fieldset--bordered">
+            <legend class="legend">{{ $value['label'] }}</legend>
+
+            @foreach ($value['pages'] as $pageID => $p)
+            <label class="label label--checkbox label--inline" for="related-page-{{ $pageID }}">
+                <input type="checkbox" id="related-page-{{ $pageID }}" name="related_page[]" @if ($p['selected']) checked="checked"@endif value="{{ json_encode([ 'page_id' => $page->id, 'related_page_id' => $pageID, 'related_pagetype_id' => $pageTypeID, ]) }}" /> {{ $p['name'] }}
+            </label>
+            @endforeach
+        </fieldset>
+
+        <br>
+        @endforeach
+    </div>
+</div>
+@endunless
+
 @if ($type->hasFeature('page_key_features'))
 <div class="l-section">
     <div class="l-content">
