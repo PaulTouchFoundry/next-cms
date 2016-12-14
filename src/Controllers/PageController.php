@@ -78,7 +78,7 @@ class PageController extends BaseController
         $this->fillFeatures(array_keys($type->features), $page, $attributes);
 
         $this->paths(array_values($request->get('paths', [])), $page);
-        $this->saveRelations($request->get('related_page', []));
+        $this->saveRelations($request->get('related_page', []), $page);
 
         return redirect()
             ->to($page->blockUrl())
@@ -107,7 +107,7 @@ class PageController extends BaseController
         $this->paths(array_values($request->get('paths', [])), $page);
         
         $page->relatedPages()->forceDelete();
-        $this->saveRelations($request->get('related_page', []));
+        $this->saveRelations($request->get('related_page', []), $page);
 
         $page->save();
 
@@ -195,11 +195,12 @@ class PageController extends BaseController
         }
     }
     
-    protected function saveRelations($relations)
+    protected function saveRelations($relations, Page $page)
     {
         foreach ($relations as $relation) {
             $decoded = json_decode($relation, true);
             if (is_array($decoded)) {
+                $decoded['page_id'] = $page->id;
                 PageRelation::create($decoded);
             }
         }
