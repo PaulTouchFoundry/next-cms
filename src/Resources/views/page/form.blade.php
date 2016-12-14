@@ -34,7 +34,7 @@
             // Resolve media
             $mediaID = data_get($hero, 'hero_media_id');
             if (!is_null($mediaID)) {
-                $media = Wearenext\DFS\Models\Media::find($mediaID);
+                $media = Wearenext\CMS\Models\Media::find($mediaID);
             }
             ?>
             @if ($form->field('features.page_hero')->value() == 'hero_buttons')
