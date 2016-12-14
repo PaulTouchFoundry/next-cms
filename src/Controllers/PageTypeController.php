@@ -42,7 +42,7 @@ class PageTypeController extends BaseController
     
     public function save(PageTypeRequest $request)
     {
-        $this->authorize('cms.pagetype_save');
+        $this->authorize('cms.pagetype_create');
         
         $pageType = PageType::create($request->all());
         return redirect()
