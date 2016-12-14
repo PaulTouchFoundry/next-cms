@@ -25,4 +25,3 @@ class PageRelation extends BaseModel
         return $this->belongsTo(PageType::class, 'related_pagetype_id');
     }
 }
-
