@@ -3,7 +3,6 @@
 namespace Wearenext\CMS\Controllers;
 
 use Illuminate\Http\Request;
-use Wearenext\CMS\Requests\Block\BlockRequest;
 use Wearenext\CMS\Models\Page;
 use Wearenext\CMS\Models\Block;
 use ErrorException;
@@ -15,16 +14,24 @@ class BlockController extends BaseController
      * Generic Block methods
      */
 
-    public function index(BlockRequest $request, $type, $page)
+    public function index(Request $request, $type, $page)
     {
+        $this->validate($request, [
+            'blocks' => 'array',
+        ]);
+        
         return view('cms::block.index')
             ->with('type', $type)
             ->with('page', $page)
             ->with('blocks', $page->getBlockGenerator());
     }
     
-    public function update(BlockRequest $request, $type, $page)
+    public function update(Request $request, $type, $page)
     {
+        $this->validate($request, [
+            'blocks' => 'array',
+        ]);
+        
         $blocks = $request->get('blocks', []);
 
         if (count($blocks) > 0) {
