@@ -26,6 +26,10 @@ return [
         'icon_list_block_saved' => 'You have successfully created a icon list block.',
         'icon_list_block_updated_undo' => 'You have successfully updated a icon list block. <a href=":url" class="alert__link">Undo?</a>',
         'icon_list_block_updated' => 'You have successfully updated a icon list block.',
+        'media_block_saved_undo' => 'You have created a media block. <a href=":url" class="alert__link">Undo?</a>',
+        'media_block_saved' => 'You have created a media block.',
+        'media_block_updated_undo' => 'You have updated the media block. <a href=":url" class="alert__link">Undo?</a>',
+        'media_block_updated' => 'You have updated the media block.',
         'deleted_undo' => 'You have deleted :name <a href=":url" class="alert__link">Undo?</a>',
         'deleted' => 'You have deleted :name',
     ],
@@ -81,6 +85,15 @@ return [
             'create' => 'Create Icon List',
             'update' => 'Update Icon List',
             'delete' => 'Delete Icon List',
+        ],
+    ],
+    'media_image' => [
+        'label' => 'Image Block',
+        'legend' => 'Image Block',
+        'controls' => [
+            'create' => 'Create Image Block',
+            'update' => 'Update Image Block',
+            'delete' => 'Delete Image Block',
         ],
     ],
 ];

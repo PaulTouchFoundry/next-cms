@@ -22,7 +22,7 @@
             <div class="l-content">
                 {!! CMSForm::open([ 'url' => route('cms.block.save_media_image_block', ['cmsType' => $type->slug, 'cmsPage' => $page,]), 'id' => 'form-block' ]) !!}
                 <fieldset class="fieldset fieldset--bordered">
-                <legend class="legend">@lang('cms::block.media.legend')</legend>
+                <legend class="legend">@lang('cms::block.media_image.legend')</legend>
                 <label class="label">File<span class="help-text">Recommended image dimension: 780px width or bigger</span></label>
                 
                 <div class="btn-group btn-group--left">
@@ -37,7 +37,7 @@
 
                     <div class="btn-group">
                         <a href="{{ $page->blockUrl() }}" class="btn btn--transparent" role="button">@lang('cms::controls.cancel')</a>
-                        {!! CMSForm::submit(trans('cms::block.media.controls.create')) !!}
+                        {!! CMSForm::submit(trans('cms::block.media_image.controls.create')) !!}
                     </div>
                 </fieldset>
                 {!! CMSForm::close() !!}
