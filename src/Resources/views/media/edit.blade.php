@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <a href="#" class="btn btn--icon btn--transparent u-pull--left" role="button"><span class="icon icon--left fa fa-chevron-left" title="Back" aria-hidden="true"></span>Back</a>
+                    <a href="#" class="btn btn--icon btn--transparent u-pull--left" role="button" onclick="history.back()"><span class="icon icon--left fa fa-chevron-left" title="Back" aria-hidden="true"></span>Back</a>
                     {!! CMSForm::submit("Upload Media") !!}
                 </div>
             </fieldset>

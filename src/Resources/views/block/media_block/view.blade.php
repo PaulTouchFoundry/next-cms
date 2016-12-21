@@ -1,14 +1,19 @@
 <div class="card card--alt">
     <div class="card-inner">
-        <a class="card__link" href="pages-edit-content-image.html">
-            <img class="card__img" src="http://placehold.it/300x169" width="300" height="169" alt="" />
-            <div class="card__type">Image</div>
-            <h3 class="card__title">image-name.jpg</h3>
-            <time class="card__time" datetime="2014-08-27">Last Updated: 27 August 2014, 08:24</time>
+        <a class="card__link" href="{{ route('cms.block.edit_block', ['cmsBlock' => $block,]) }}">
+            <input type="hidden" name="blocks[]" value="{{ $block->id }}" />
+            <img class="card__img" src="{{ $block->media->first()->getThumb() }}" width="300" height="169" alt="" />
+            <div class="card__type">Image Block</div>
+            @if (!empty("{$block->title}"))
+                <h3 class="card__title">"<i>{{$block->title}}</i>"</h3>
+            @else
+                <h3 class="card__title">{!! $block->media->first()->filename !!}</h3>
+            @endif
+            <time class="card__time" datetime="{{ date('Y-m-d', strtotime($block->updated_at)) }}">Last Updated: {{ date('j F Y, H:i', strtotime($block->updated_at)) }}</time>
         </a>
         <div class="card__icons">
-            <a href="#"><span class="icon fa fa-arrow-up" title="Move Up" aria-hidden="true"></span></a>
-            <a href="#"><span class="icon fa fa-arrow-down" title="Move Down" aria-hidden="true"></span></a>
+            <a class="js-move-block-up"><span class="icon fa fa-arrow-up" title="Move Up" aria-hidden="true"></span></a>
+            <a class="js-move-block-down"><span class="icon fa fa-arrow-down" title="Move Down" aria-hidden="true"></span></a>
         </div>
     </div>
 </div>

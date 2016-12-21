@@ -28,6 +28,9 @@ Route::post('/page/{cmsType}/{cmsPage}/text_block', [ 'uses' => "{$blockControll
 Route::get('/page/{cmsType}/{cmsPage}/icon_list_block', [ 'uses' => "{$blockController}@createIconListBlock", 'as' => 'cms.block.create_icon_list_block' ]);
 Route::post('/page/{cmsType}/{cmsPage}/icon_list_block', [ 'uses' => "{$blockController}@saveIconListBlock", 'as' => 'cms.block.save_icon_list_block' ]);
 
+Route::get('/page/{cmsType}/{cmsPage}/media_block', [ 'uses' => "{$blockController}@createMediaBlock", 'as' => 'cms.block.create_media_image_block' ]);
+Route::post('/page/{cmsType}/{cmsPage}/media_block', [ 'uses' => "{$blockController}@saveMediaBlock", 'as' => 'cms.block.save_media_image_block' ]);
+
 Route::get('/block/{cmsBlock}/edit', [ 'uses' => "{$blockController}@editBlock", 'as' => 'cms.block.edit_block' ]);
 Route::post('/block/{cmsBlock}/edit', [ 'uses' => "{$blockController}@updateBlock", 'as' => 'cms.block.update_block' ]);
 Route::post('/block/{cmsBlock}/delete', [ 'uses' => "{$blockController}@deleteBlock", 'as' => 'cms.block.delete_block' ]);

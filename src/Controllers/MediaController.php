@@ -13,7 +13,7 @@ class MediaController extends BaseController
     public function update(Request $request)
     {
         $this->validate($request, [
-            'tag' => 'required|in:hero,block',
+            'tag' => 'required|in:hero,block,primary,secondary',
             'media_file' => 'image',
         ]);
 
@@ -24,6 +24,7 @@ class MediaController extends BaseController
                 $file = $request->file('media_file');
                 $media->tag = $request->get('tag');
                 $media->url = $this->getUploadURL($file);
+                $media->filename = str_limit($file->getClientOriginalName());
 
                 $media->save();
             }

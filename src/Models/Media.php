@@ -7,6 +7,7 @@ class Media extends BaseModel
     protected $fillable = [
         'tag',
         'url',
+        'filename',
     ];
 
     public function blocks()
