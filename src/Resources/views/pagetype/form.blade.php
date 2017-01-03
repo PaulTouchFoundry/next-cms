@@ -112,8 +112,8 @@
             <label class="label label--checkbox label--inline" for="block-icon-list">
                 <input type="checkbox" id="block-icon-list" name="blocks[icon_list]" value="1"{!! $form->field('blocks.icon_list')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.icon_list')
             </label>
-            <label class="label label--checkbox label--inline" for="block-media-html">
-                <input type="checkbox" id="block-media-html" name="blocks[media_html]" value="1"{!! $form->field('blocks.media_html')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.media_html')
+            <label class="label label--checkbox label--inline" for="block-embed">
+                <input type="checkbox" id="block-embed" name="blocks[embed]" value="1"{!! $form->field('blocks.embed')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.embed')
             </label>
             <label class="label label--checkbox label--inline" for="block-media-image">
                 <input type="checkbox" id="block-media-image" name="blocks[media_image]" value="1"{!! $form->field('blocks.media_image')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.media_image')

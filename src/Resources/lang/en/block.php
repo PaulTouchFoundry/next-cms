@@ -30,6 +30,10 @@ return [
         'media_block_saved' => 'You have created a media block.',
         'media_block_updated_undo' => 'You have updated the media block. <a href=":url" class="alert__link">Undo?</a>',
         'media_block_updated' => 'You have updated the media block.',
+        'embed_block_saved_undo' => 'You have created a HTML block. <a href=":url" class="alert__link">Undo?</a>',
+        'embed_block_saved' => 'You have created a HTML block.',
+        'embed_block_updated_undo' => 'You have updated the HTML block. <a href=":url" class="alert__link">Undo?</a>',
+        'embed_block_updated' => 'You have updated the HTML block.',
         'deleted_undo' => 'You have deleted :name <a href=":url" class="alert__link">Undo?</a>',
         'deleted' => 'You have deleted :name',
     ],
@@ -94,6 +98,21 @@ return [
             'create' => 'Create Image Block',
             'update' => 'Update Image Block',
             'delete' => 'Delete Image Block',
+        ],
+    ],
+    'embed' => [
+        'label' => 'HTML Block',
+        'legend' => 'HTML Block',
+        'fields' => [
+            'content' => [
+                'label' => 'HTML',
+                'placeholder' => '',
+            ],
+        ],
+        'controls' => [
+            'create' => 'Create HTML Block',
+            'update' => 'Update HTML Block',
+            'delete' => 'Delete HTML Block',
         ],
     ],
 ];

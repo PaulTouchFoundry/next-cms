@@ -63,6 +63,8 @@ class BlockController extends BaseController
                 return $this->updateIconListBlock($request, $block);
             case Block::TYPE_MEDIA:
                 return $this->updateMediaBlock($request, $block);
+            case Block::TYPE_EMBED:
+                return $this->updateEmbedBlock($request, $block);
             default:
                 throw new ErrorException("Updating block type '{$block->block_type}' is not possible");
         }
@@ -242,5 +244,41 @@ class BlockController extends BaseController
         
         return back()
             ->withErrors([ 'success' => [ trans('cms::block.messages.media_block_updated') ] ]);
+    }
+
+    /*
+     * HTML Block methods
+     */
+
+    public function createEmbedBlock($type, $page)
+    {
+        return view('cms::block.embed_block.create')
+            ->with('type', $type)
+            ->with('page', $page);
+    }
+
+    public function saveEmbedBlock(Request $request, $type, $page)
+    {
+        $attributes = $request->all();
+
+        $attributes['block_type'] = Block::TYPE_EMBED;
+
+        $block = $page->blocks()->create($attributes);
+
+        $this->appendBlockPage($page, $block);
+
+        return redirect()
+            ->to($page->blockUrl())
+            ->withErrors([ 'success' => [ trans('cms::block.messages.embed_block_saved') ] ]);
+    }
+
+    protected function updateEmbedBlock(Request $request, $block)
+    {
+        $block->fill($request->all());
+
+        $block->save();
+
+        return back()
+            ->withErrors([ 'success' => [ trans('cms::block.messages.embed_block_updated') ] ]);
     }
 }
