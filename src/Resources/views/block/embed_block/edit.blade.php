@@ -30,7 +30,7 @@
 
                     <div class="btn-group">
                         <a href="{{ $page->blockUrl() }}" class="btn btn--transparent" role="button">@lang('cms::controls.cancel')</a>
-                        {!! CMSForm::submit(trans('cms::block.text.controls.update')) !!}
+                        {!! CMSForm::submit(trans('cms::block.embed.controls.update')) !!}
                     </div>
                 </fieldset>
 
@@ -40,7 +40,7 @@
 
         <hr class="hr" />
         {!! CMSForm::open([ 'url' => route('cms.block.delete_block', [ 'cmsBlock' => $block, ]), 'method' => 'post' ]) !!}
-        <button type="submit" class="btn btn--icon btn--red" role="button"><span class="icon icon--left fa fa-trash-o" aria-hidden="true"></span>@lang('cms::block.text.controls.delete')</button>
+        <button type="submit" class="btn btn--icon btn--red" role="button"><span class="icon icon--left fa fa-trash-o" aria-hidden="true"></span>@lang('cms::block.embed.controls.delete')</button>
         {!! CMSForm::close() !!}
         <hr class="hr" />
     </div>
