@@ -17,6 +17,12 @@ class BlockController extends BaseController
 
     public function index(Request $request, $type, $page)
     {
+        $blockCount = count($type->blocks);
+        if ($blockCount == 1 || ($blockCount == 0 && $type->callout)) {
+            return redirect()
+                ->to($this->getDirectBlockUrl($type, $page));
+        }
+        
         $this->validate($request, [
             'blocks' => 'array',
         ]);
@@ -306,7 +312,7 @@ class BlockController extends BaseController
             ->withErrors([ 'success' => [ trans('cms::block.messages.embed_block_updated') ] ]);
     }
     
-    public function hasBlockQuota($type, $page)
+    protected function hasBlockQuota($type, $page)
     {
         if (!$type->block_quota) {
             return false;
@@ -317,5 +323,28 @@ class BlockController extends BaseController
         }
         
         return false;
+    }
+    
+    protected function getDirectBlockUrl($type, $page)
+    {
+        $t = array_get(array_keys($type->blocks), '0');
+        
+        // Callouts
+        if (!$t) {
+            $callout = $page->callouts()->first();
+            if ($callout) {
+                return route('cms.callout.edit', ['cmsType' => $type->slug, 'cmsPage' => $page, 'cmsCallout' => $callout,]);
+            }
+            
+            return route('cms.callout.create', ['cmsType' => $type->slug, 'cmsPage' => $page,]);
+        }
+        
+        // Blocks
+        $block = $page->blocks()->first();
+        if ($block) {
+            return route('cms.block.edit_block', ['cmsBlock' => $block,]);
+        }
+        
+        return route("cms.block.create_{$t}_block", ['cmsType' => $type->slug, 'cmsPage' => $page,]);
     }
 }
