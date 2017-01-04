@@ -45,12 +45,12 @@
 
                     <label class="label js-callout-option u-hidden" data-option="large_heading" for="heading">
                         @lang('cms::callout.fields.large_heading.label')
-                        {!! CMSForm::text('large_heading', null, [ 'id' => 'heading', 'placeholder' => trans('block.callout.fields.large_heading.placeholder') ]) !!}
+                        {!! CMSForm::text('large_heading', null, [ 'id' => 'heading', 'placeholder' => trans('cms::callout.fields.large_heading.placeholder') ]) !!}
                     </label>
 
                     <label class="label js-callout-option u-hidden" data-option="small_heading" for="small_heading">
-                        @lang('block.callout.fields.small_heading.label')
-                        {!! CMSForm::text('small_heading', null, [ 'id' => 'small_heading', 'placeholder' => trans('block.callout.fields.small_heading.placeholder') ]) !!}
+                        @lang('cms::callout.fields.small_heading.label')
+                        {!! CMSForm::text('small_heading', null, [ 'id' => 'small_heading', 'placeholder' => trans('cms::callout.fields.small_heading.placeholder') ]) !!}
                     </label>
 
                     <label class="label js-callout-option u-hidden" data-option="text" for="paragraph">
@@ -90,7 +90,7 @@
 
                     <div class="btn-group">
                         <a href="{{ $page->blockUrl() }}" class="btn btn--transparent" role="button">@lang('cms::controls.cancel')</a>
-                        <button class="btn btn--green" type="submit">@lang('cms::controls.create', [ 'block' => trans('cms::callout.controls.create') ])</button>
+                        <button class="btn btn--green" type="submit">@lang('cms::callout.controls.create')</button>
                     </div>
                 </fieldset>
                 {!! CMSForm::close() !!}

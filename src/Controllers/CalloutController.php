@@ -3,7 +3,6 @@
 namespace Wearenext\CMS\Controllers;
 
 use Illuminate\Http\Request;
-use Wearenext\CMS\Models\Callout;
 
 class CalloutController extends BaseController
 {
