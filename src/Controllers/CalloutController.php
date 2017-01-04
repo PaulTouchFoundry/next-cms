@@ -72,5 +72,5 @@ class CalloutController extends BaseController
         }
         
         return $used;
-    }   
+    }
 }
