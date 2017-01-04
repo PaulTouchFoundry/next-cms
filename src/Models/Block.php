@@ -33,6 +33,11 @@ class Block extends BaseModel
     {
         return $this->hasOne(self::class, 'next_block_id');
     }
+    
+    public function callouts()
+    {
+        return $this->hasMany(Callout::class);
+    }
 
     public function page()
     {

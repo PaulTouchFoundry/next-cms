@@ -5,6 +5,7 @@ $pageTypeController = 'Wearenext\CMS\Controllers\PageTypeController';
 $blockController = 'Wearenext\CMS\Controllers\BlockController';
 $mediaController = 'Wearenext\CMS\Controllers\MediaController';
 $userController = 'Wearenext\CMS\Controllers\UserController';
+$calloutController = 'Wearenext\CMS\Controllers\CalloutController';
 
 Route::get('/', [ 'uses' => "{$pageController}@index", 'as' => 'cms.index' ]);
 Route::get('/page', [ 'uses' => "{$pageController}@index", 'as' => 'cms.page.index' ]);
@@ -58,3 +59,9 @@ Route::post('/user/create', [ 'uses' => "{$userController}@save", 'as' => 'cms.u
 Route::post('/user/{cmsUser}/edit', [ 'uses' => "{$userController}@update", 'as' => 'cms.user.update' ]);
 Route::post('/user/{cmsUser}/delete', [ 'uses' => "{$userController}@delete", 'as' => 'cms.user.delete' ]);
 Route::get('/user/{id}/restore', [ 'uses' => "{$userController}@restore", 'as' => 'cms.user.restore' ]);
+
+Route::get('/page/{cmsType}/{cmsPage}/callout', [ 'uses' => "{$calloutController}@create", 'as' => 'cms.callout.create' ]);
+Route::post('/page/{cmsType}/{cmsPage}/callout', [ 'uses' => "{$calloutController}@save", 'as' => 'cms.callout.save' ]);
+Route::get('/page/{cmsType}/{cmsPage}/{cmsCallout}/edit', [ 'uses' => "{$calloutController}@edit", 'as' => 'cms.callout.edit' ]);
+Route::post('/page/{cmsType}/{cmsPage}/{cmsCallout}/edit', [ 'uses' => "{$calloutController}@update", 'as' => 'cms.callout.update' ]);
+Route::post('/page/{cmsType}/{cmsPage}/{cmsCallout}/delete', [ 'uses' => "{$calloutController}@delete", 'as' => 'cms.callout.delete' ]);

@@ -55,6 +55,7 @@ class PageTypeController extends BaseController
         $this->authorize('cms.pagetype_edit');
         
         $attributes = $request->all();
+        $attributes['callout'] = array_get($attributes, 'callout', 0);
         $attributes['features'] = array_get($attributes, 'features', []);
         $attributes['fields'] = array_get($attributes, 'fields', []);
         $pageType->fill($attributes);

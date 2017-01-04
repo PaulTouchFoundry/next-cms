@@ -12,9 +12,9 @@
             <a class="js-move-block-down"><span class="icon fa fa-arrow-down" title="Move Down" aria-hidden="true"></span></a>
         </div>
 
-        {{--@foreach ($block->callouts as $callout)
+        @foreach ($block->callouts as $callout)
             <div class="card card--attachment">
-                <a class="card__link" href="{{ action('BlockController@getEditRouteCallout', [ 'id' => $callout, 'page_id' => $page->id ]) }}">
+                <a class="card__link" href="{{ route('cms.callout.edit', ['cmsType' => $type->slug, 'cmsPage' => $page, 'cmsCallout' => $callout,]) }}">
                     <div class="card-inner">
                         <div class="card__type">Call Out</div>
                         @if (!is_null($callout->large_heading))
@@ -31,6 +31,6 @@
                     </div>
                 </a>
             </div>
-        @endforeach--}}
+        @endforeach
     </div>
 </div>

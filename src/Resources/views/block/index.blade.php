@@ -24,6 +24,10 @@
                     @foreach (array_keys($type->blocks) as $block)
                     <a href="{{ route("cms.block.create_{$block}_block", [ 'cmsType' => $type->slug, 'cmsPage' => $page, ]) }}" class="btn btn--bordered btn--icon btn--small"><span class="icon icon--left fa fa-plus" title="Add" aria-hidden="true"></span>@lang("cms::block.{$block}.label")</a>
                     @endforeach
+                    
+                    @if ($type->callout)
+                    <a href="{{ route("cms.callout.create", [ 'cmsType' => $type->slug, 'cmsPage' => $page, ]) }}" class="btn btn--bordered btn--icon btn--small"><span class="icon icon--left fa fa-plus" title="Add" aria-hidden="true"></span>@lang("cms::callout.label")</a>
+                    @endif
                 </div>
                 @foreach ($blocks as $block)
                     @include("cms::block.{$block->block_type}_block.view", [ $type, $page, $block ])

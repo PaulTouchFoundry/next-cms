@@ -43,6 +43,11 @@ class Page extends BaseModel
         return $this->belongsTo(Block::class, 'starting_block_id', 'id');
     }
     
+    public function callouts()
+    {
+        return $this->hasMany(Callout::class);
+    }
+    
     public function pageHero()
     {
         return $this->hasOne(Features\Hero::class);

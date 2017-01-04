@@ -8,6 +8,7 @@ class PageType extends BaseModel
         'label',
         'slug',
         'template',
+        'callout',
         'features',
         'fields',
         'blocks',
@@ -15,6 +16,7 @@ class PageType extends BaseModel
     ];
     
     protected $casts = [
+        'callout' => 'boolean',
         'features' => 'array',
         'fields' => 'array',
         'blocks' => 'array',

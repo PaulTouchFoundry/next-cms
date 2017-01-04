@@ -18,6 +18,7 @@ class CreatePageTypesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('short_url')->nullable();
             $table->string('template');
+            $table->boolean('callout')->default(0);
             $table->json('features');
             $table->json('fields');
             $table->json('blocks');

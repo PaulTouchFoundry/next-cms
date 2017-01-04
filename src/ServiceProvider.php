@@ -43,6 +43,7 @@ class ServiceProvider extends BaseProvider
         $router->model('cmsPageType', '\Wearenext\CMS\Models\PageType');
         $router->model('cmsBlock', '\Wearenext\CMS\Models\Block');
         $router->model('cmsUser', config('auth.model'));
+        $router->model('cmsCallout', '\Wearenext\CMS\Models\Callout');
         
         // Add views
         $this->loadViewsFrom($this->relative('/Resources/views'), 'cms');

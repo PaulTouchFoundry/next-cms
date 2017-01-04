@@ -121,6 +121,9 @@
             <label class="label label--checkbox label--inline" for="block-text">
                 <input type="checkbox" id="block-text" name="blocks[text]" value="1"{!! $form->field('blocks.text')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.text')
             </label>
+            <label class="label label--checkbox label--inline" for="callout">
+                <input type="checkbox" id="callout" name="callout" value="1"{!! $form->field('callout')->checked(true) !!}/> @lang('cms::pagetype.fields.callout.text')
+            </label>
         </fieldset>
     </div>
 </div>
