@@ -36,6 +36,7 @@ return [
         'embed_block_updated' => 'You have updated the HTML block.',
         'deleted_undo' => 'You have deleted :name <a href=":url" class="alert__link">Undo?</a>',
         'deleted' => 'You have deleted :name',
+        'block_quota' => 'There are too many blocks',
     ],
     'text' => [
         'label' => 'Text Block',

@@ -141,6 +141,12 @@ class BlockController extends BaseController
         $this->validate($request, [
             'title' => 'required_with:quicklink',
         ]);
+        
+        if ($this->hasBlockQuota($type, $page)) {
+            return redirect()
+                ->to($page->blockUrl())
+                ->withErrors([ 'success' => [ trans('cms::block.messages.block_quota') ] ]);
+        }
 
         $attributes = $request->all();
 
@@ -181,6 +187,12 @@ class BlockController extends BaseController
 
     public function saveIconListBlock(Request $request, $type, $page)
     {
+        if ($this->hasBlockQuota($type, $page)) {
+            return redirect()
+                ->to($page->blockUrl())
+                ->withErrors([ 'success' => [ trans('cms::block.messages.block_quota') ] ]);
+        }
+
         $attributes = $request->all();
 
         $attributes['block_type'] = Block::TYPE_ICON;
@@ -216,6 +228,12 @@ class BlockController extends BaseController
 
     public function saveMediaBlock(Request $request, $type, $page)
     {
+        if ($this->hasBlockQuota($type, $page)) {
+            return redirect()
+                ->to($page->blockUrl())
+                ->withErrors([ 'success' => [ trans('cms::block.messages.block_quota') ] ]);
+        }
+
         $attributes = $request->all();
 
         $attributes['block_type'] = Block::TYPE_MEDIA;
@@ -259,6 +277,12 @@ class BlockController extends BaseController
 
     public function saveEmbedBlock(Request $request, $type, $page)
     {
+        if ($this->hasBlockQuota($type, $page)) {
+            return redirect()
+                ->to($page->blockUrl())
+                ->withErrors([ 'success' => [ trans('cms::block.messages.block_quota') ] ]);
+        }
+
         $attributes = $request->all();
 
         $attributes['block_type'] = Block::TYPE_EMBED;
@@ -280,5 +304,18 @@ class BlockController extends BaseController
 
         return back()
             ->withErrors([ 'success' => [ trans('cms::block.messages.embed_block_updated') ] ]);
+    }
+    
+    public function hasBlockQuota($type, $page)
+    {
+        if (!$type->block_quota) {
+            return false;
+        }
+        
+        if ($type->block_quota <= $page->blocks()->count()) {
+            return true;
+        }
+        
+        return false;
     }
 }

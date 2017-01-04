@@ -8,6 +8,7 @@ class PageType extends BaseModel
         'label',
         'slug',
         'template',
+        'block_quota',
         'callout',
         'features',
         'fields',

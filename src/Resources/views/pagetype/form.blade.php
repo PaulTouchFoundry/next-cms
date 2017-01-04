@@ -104,6 +104,11 @@
 </div>
 <div class="l-section">
     <div class="l-content">
+        <label class="{{ $form->field('block_quota')->labelClass() }}" for="label">
+            @lang('cms::pagetype.fields.block_quota.label')
+            <input class="input" type="number" id="label" name="{{ $form->field('block_quota')->name() }}" placeholder="@lang('cms::pagetype.fields.block_quota.placeholder')" value="{{ $form->field('block_quota')->value() }}" />
+            {!! $form->field('block_quota')->helpHtml() !!}
+        </label>
         <fieldset class="fieldset fieldset--bordered">
             <legend class="legend">@lang('cms::pagetype.fields.blocktypes.label')</legend>
             <label class="label label--checkbox label--inline" for="block-callout">
