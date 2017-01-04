@@ -71,6 +71,8 @@ class BlockController extends BaseController
                 return $this->updateMediaBlock($request, $block);
             case Block::TYPE_EMBED:
                 return $this->updateEmbedBlock($request, $block);
+            case Block::TYPE_FEATURED:
+                return $this->updateFeaturedBlock($request, $block);
             default:
                 throw new ErrorException("Updating block type '{$block->block_type}' is not possible");
         }
@@ -268,6 +270,55 @@ class BlockController extends BaseController
         
         return back()
             ->withErrors([ 'success' => [ trans('cms::block.messages.media_block_updated') ] ]);
+    }
+    
+    /*
+     * Featured Block methods
+     */
+
+    public function createFeaturedBlock($type, $page)
+    {
+        return view('cms::block.featured_block.create')
+            ->with('type', $type)
+            ->with('page', $page);
+    }
+
+    public function saveFeaturedBlock(Request $request, $type, $page)
+    {
+        if ($this->hasBlockQuota($type, $page)) {
+            return redirect()
+                ->to($page->blockUrl())
+                ->withErrors([ 'success' => [ trans('cms::block.messages.block_quota') ] ]);
+        }
+
+        $attributes = $request->all();
+
+        $attributes['block_type'] = Block::TYPE_FEATURED;
+
+        $block = $page->blocks()->create($attributes);
+        
+        $block->media()->detach();
+        $block->media()->attach(Media::findOrFail($attributes['media_id']));
+
+        $this->appendBlockPage($page, $block);
+
+        return redirect()
+            ->to($page->blockUrl())
+            ->withErrors([ 'success' => [ trans('cms::block.messages.featured_block_saved') ] ]);
+    }
+
+    protected function updateFeaturedBlock(Request $request, $block)
+    {
+        $block->fill($request->all());
+        
+        $block->media()->detach();
+        
+        $block->media()->attach(Media::findOrFail($request->get('media_id')));
+        
+        $block->save();
+        
+        return back()
+            ->withErrors([ 'success' => [ trans('cms::block.messages.featured_block_updated') ] ]);
     }
 
     /*

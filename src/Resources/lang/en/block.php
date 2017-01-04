@@ -101,6 +101,15 @@ return [
             'delete' => 'Delete Image Block',
         ],
     ],
+    'featured' => [
+        'label' => 'Featured Image',
+        'legend' => 'Featured Image',
+        'controls' => [
+            'create' => 'Create Featured Image',
+            'update' => 'Update Featured Image',
+            'delete' => 'Delete Featured Image',
+        ],
+    ],
     'embed' => [
         'label' => 'HTML Block',
         'legend' => 'HTML Block',

@@ -8,6 +8,7 @@ class Block extends BaseModel
     const TYPE_MEDIA = 'media';
     const TYPE_TEXT = 'text';
     const TYPE_EMBED = 'embed';
+    const TYPE_FEATURED = 'featured';
 
     protected $fillable = [
         'title',

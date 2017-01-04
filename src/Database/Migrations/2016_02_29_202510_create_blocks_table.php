@@ -19,7 +19,7 @@ class CreateBlocksTable extends Migration
             $table->string('headline');
             $table->text('content')->nullable();
             $table->integer('next_block_id')->unsigned()->nullable();
-            $table->enum('block_type', ['icon_list','media','text','embed'])
+            $table->enum('block_type', ['icon_list','media','text','embed','featured'])
                 ->nullable();
             $table->json('icon_list')->nullable();
             $table->boolean('quicklink');

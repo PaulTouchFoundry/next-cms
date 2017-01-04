@@ -32,6 +32,9 @@ Route::post('/page/{cmsType}/{cmsPage}/icon_list_block', [ 'uses' => "{$blockCon
 Route::get('/page/{cmsType}/{cmsPage}/media_block', [ 'uses' => "{$blockController}@createMediaBlock", 'as' => 'cms.block.create_media_image_block' ]);
 Route::post('/page/{cmsType}/{cmsPage}/media_block', [ 'uses' => "{$blockController}@saveMediaBlock", 'as' => 'cms.block.save_media_image_block' ]);
 
+Route::get('/page/{cmsType}/{cmsPage}/featured_block', [ 'uses' => "{$blockController}@createFeaturedBlock", 'as' => 'cms.block.create_featured_block' ]);
+Route::post('/page/{cmsType}/{cmsPage}/featured_block', [ 'uses' => "{$blockController}@saveFeaturedBlock", 'as' => 'cms.block.save_featured_block' ]);
+
 Route::get('/page/{cmsType}/{cmsPage}/embed_block', [ 'uses' => "{$blockController}@createEmbedBlock", 'as' => 'cms.block.create_embed_block' ]);
 Route::post('/page/{cmsType}/{cmsPage}/embed_block', [ 'uses' => "{$blockController}@saveEmbedBlock", 'as' => 'cms.block.save_embed_block' ]);
 
