@@ -17,10 +17,12 @@ class BlockController extends BaseController
 
     public function index(Request $request, $type, $page)
     {
-        $blockCount = count($type->blocks);
-        if ($blockCount == 1 || ($blockCount == 0 && $type->callout)) {
-            return redirect()
-                ->to($this->getDirectBlockUrl($type, $page));
+        if ($type->block_quota == 1) {
+            $blockCount = count($type->blocks);
+            if ($blockCount == 1 || ($blockCount == 0 && $type->callout)) {
+                return redirect()
+                    ->to($this->getDirectBlockUrl($type, $page));
+            }
         }
         
         $this->validate($request, [
