@@ -80,25 +80,47 @@
 
         <fieldset class="fieldset fieldset--bordered options_page_relationship">
             <legend class="legend">@lang('cms::pagetype.fields.page_relationship.label')</legend>
+            @foreach ($form->field('relations')->value([]) as $key => $value)
             <div class="row">
                 <div class="col col-1-2">
-                    <label class="{{ $form->field('relations.0.label')->labelClass() }}" for="relationship-name">
+                    <label class="{{ $form->field("relations.{$key}.label")->labelClass() }}" for="relationship-name-{{ $key }}">
                         <span class="u-visuallyhidden">@lang('cms::pagetype.fields.page_relationship_name.label')</span>
-                        <input class="input" type="text" id="relationship-name" name="relations[0][label]" maxlength="50" placeholder="@lang('cms::pagetype.fields.page_relationship_name.placeholder')" value="{{ $form->field('relations.0.label')->value() }}" />
+                        <input class="input" type="text" id="relationship-name-{{ $key }}" name="relations[{{ $key }}][label]" maxlength="50" placeholder="@lang('cms::pagetype.fields.page_relationship_name.placeholder')" value="{{ $form->field("relations.{$key}.label")->value() }}" />
                         {!! $form->field('relationship.name')->helpHtml() !!}
                     </label>
                 </div>
                 <div class="col col-1-2">
-                    <label class="label" for="relationship-page">
+                    <label class="label" for="relationship-page-{{ $key }}">
                         <span class="u-visuallyhidden">@lang('cms::pagetype.fields.page_relationship_related.label')</span>
-                        <select id="relationship-page" name="relations[0][pagetype_id]" class="input input--select">
+                        <select id="relationship-page-{{ $key }}" name="relations[{{ $key }}][pagetype_id]" class="input input--select">
                             @foreach (Wearenext\CMS\Models\PageType::all() as $entry)
-                            <option value="{{ $entry->id }}"{!! $form->field('relations.0.pagetype_id')->selected($entry->id) !!}>{{ $entry->label }}</option>
+                            <option value="{{ $entry->id }}"{!! $form->field("relations.{$key}.pagetype_id")->selected($entry->id) !!}>{{ $entry->label }}</option>
                             @endforeach
                         </select>
                     </label>
                 </div>
             </div>
+            @endforeach
+            <div class="row js-relation-entry" data-clonekey="{{ count($form->field('relations')->value([])) }}">
+                <div class="col col-1-2">
+                    <label class="{{ $form->field('relations.0.label')->labelClass() }}" for="relationship-name-id">
+                        <span class="u-visuallyhidden">@lang('cms::pagetype.fields.page_relationship_name.label')</span>
+                        <input class="input" type="text" id="relationship-name-id" name="relations[id][label]" maxlength="50" placeholder="@lang('cms::pagetype.fields.page_relationship_name.placeholder')" value="" />
+                        {!! $form->field('relationship.name')->helpHtml() !!}
+                    </label>
+                </div>
+                <div class="col col-1-2">
+                    <label class="label" for="relationship-page-id">
+                        <span class="u-visuallyhidden">@lang('cms::pagetype.fields.page_relationship_related.label')</span>
+                        <select id="relationship-page-id" name="relations[id][pagetype_id]" class="input input--select">
+                            @foreach (Wearenext\CMS\Models\PageType::all() as $entry)
+                            <option value="{{ $entry->id }}">{{ $entry->label }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn--bordered btn--icon btn--small js-clone-entry-add" type="button" data-clone="js-relation-entry"><span class="icon icon--left fa fa-plus" title="Add" aria-hidden="true"></span>Relation</button>
         </fieldset>
     </div>
 </div>

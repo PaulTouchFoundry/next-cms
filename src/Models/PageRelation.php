@@ -5,6 +5,8 @@ namespace Wearenext\CMS\Models;
 class PageRelation extends BaseModel
 {
     protected $fillable = [
+        'relation_name',
+        'relation_id',
         'page_id',
         'related_page_id',
         'related_pagetype_id',

@@ -74,13 +74,13 @@
 @unless (!count($relations))
 <div class="l-section">
     <div class="l-content">
-        @foreach ($relations as $pageTypeID => $value)
+        @foreach ($relations as $id => $value)
         <fieldset class="fieldset fieldset--bordered">
             <legend class="legend">{{ $value['label'] }}</legend>
 
             @foreach ($value['pages'] as $pageID => $p)
             <label class="label label--checkbox label--inline" for="related-page-{{ $pageID }}">
-                <input type="checkbox" id="related-page-{{ $pageID }}" name="related_page[]" @if ($p['selected']) checked="checked"@endif value="{{ json_encode([ 'related_page_id' => $pageID, 'related_pagetype_id' => $pageTypeID, ]) }}" /> {{ $p['name'] }}
+                <input type="checkbox" id="related-page-{{ $pageID }}" name="related_page[]" @if ($p['selected']) checked="checked"@endif value="{{ json_encode([ 'related_page_id' => $pageID, 'related_pagetype_id' => $value['pagetype_id'], 'relation_name' => $value['label'], 'relation_id' => $value['relation_id'] ]) }}" /> {{ $p['name'] }}
             </label>
             @endforeach
         </fieldset>

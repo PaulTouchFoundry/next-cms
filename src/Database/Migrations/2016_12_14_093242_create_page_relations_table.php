@@ -14,6 +14,8 @@ class CreatePageRelationsTable extends Migration
     {
         Schema::create('page_relations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('relation_name');
+            $table->integer('relation_id')->unsigned();
             $table->integer('page_id')->unsigned();
             $table->integer('related_page_id')->unsigned();
             $table->integer('related_pagetype_id')->unsigned();

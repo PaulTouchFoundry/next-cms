@@ -706,7 +706,7 @@ SITENAME = {
                         $existing.find('label').each(function() {
                             var idFor = $(this).attr('for').replace('id', clonekey);
                             $(this).attr('for', idFor);
-                            $(this).find('input').each(function() {
+                            $(this).find('input,select').each(function() {
                                 var id = $(this).attr('id').replace('id', clonekey);
                                 var name = $(this).attr('name').replace('id', clonekey);
                                 $(this).attr('id', id);

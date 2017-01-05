@@ -208,37 +208,47 @@ class PageController extends BaseController
     
     protected function relations(PageType $type, Page $page = null)
     {
-        $pages = [];
+        $relations = [];
+        $pageType = [];
         
-        foreach ($type->relations as $r) {
-            $relatedType = PageType::find($r['pagetype_id']);
-            if (!isset($pages[$relatedType->id])) {
-                $pages[$relatedType->id] = ['label' => $r['label'], 'pages' => [],];
-            }
+        foreach ($type->relations as $rid => $r) {
+            $relatedType = PageType::with('pages')->find($r['pagetype_id']);
+            $pages = [];
             
             foreach ($relatedType->pages as $p) {
-                $pages[$relatedType->id]['pages'][$p->id] = [
+                $pages[$p->id] = [
                     'name' => $p->name,
                     'selected' => false,
                 ];
             }
+            
+            $pageType["{$rid}-{$r['pagetype_id']}"] = count($relations);
+            
+            $relations[] = [
+                'relation_id' => $rid,
+                'pagetype_id' => $r['pagetype_id'],
+                'label' => $r['label'],
+                'pages' => $pages,
+            ];
         }
         
         if (is_null($page)) {
-            return $pages;
+            return $relations;
         }
         
         foreach ($page->relatedPages as $p) {
-            if (!isset($pages[$p->related_pagetype_id])) {
+            $key = "{$p->relation_id}-{$p->related_pagetype_id}";
+            if (!isset($pageType[$key])) {
                 continue;
             }
             
-            if (!isset($pages[$p->related_pagetype_id]['pages'][$p->related_page_id])) {
-                continue;
+            $rid = $pageType[$key];
+            
+            if (isset($relations[$rid]['pages'][$p->related_page_id])) {
+                $relations[$rid]['pages'][$p->related_page_id]['selected'] = true;
             }
-            $pages[$p->related_pagetype_id]['pages'][$p->related_page_id]['selected'] = true;
         }
         
-        return $pages;
+        return $relations;
     }
 }

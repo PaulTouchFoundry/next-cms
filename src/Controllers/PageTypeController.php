@@ -58,6 +58,7 @@ class PageTypeController extends BaseController
         $attributes['callout'] = array_get($attributes, 'callout', 0);
         $attributes['features'] = array_get($attributes, 'features', []);
         $attributes['fields'] = array_get($attributes, 'fields', []);
+        $attributes['relations'] = array_get($attributes, 'relations', []);
         $pageType->fill($attributes);
         $pageType->save();
         return redirect()
