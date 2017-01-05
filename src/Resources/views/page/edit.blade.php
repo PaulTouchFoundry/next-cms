@@ -28,7 +28,7 @@
         {!! csrf_field() !!}
     </form>
     
-    @can('cms.page_delete')
+    @can('cms.page_destroy')
     <form action="{{ route('cms.page.delete', [ 'cmsType' => $type->slug, 'cmsPage' => $page ]) }}" method="post">
         <hr class="hr" />
         <button class="btn btn--icon btn--red" type="submit"><span class="icon icon--left fa fa-trash-o" aria-hidden="true"></span>@lang('cms::page.controls.delete', [ 'type' => str_singular($type->label), ])</button>

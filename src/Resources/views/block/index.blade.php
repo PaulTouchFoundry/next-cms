@@ -41,12 +41,12 @@
         {{ csrf_field() }}
     </form>
 
-    <hr class="hr" />
-
+    @can('cms.page_destroy')
     {!! CMSForm::open([ 'url' => route('cms.page.delete', [ 'cmsType' => $type->slug, 'cmsPage' => $page ]), 'method' => 'post' ]) !!}
-    <button type="submit" class="btn btn--icon btn--red" role="button"><span class="icon icon--left fa fa-trash-o" aria-hidden="true"></span>@lang('cms::page.controls.delete', [ 'type' => str_singular($type->label), ])</button>
-    {!! CMSForm::close() !!}
-
     <hr class="hr" />
+    <button type="submit" class="btn btn--icon btn--red" role="button"><span class="icon icon--left fa fa-trash-o" aria-hidden="true"></span>@lang('cms::page.controls.delete', [ 'type' => str_singular($type->label), ])</button>
+    <hr class="hr" />
+    {!! CMSForm::close() !!}
+    @endcan
 </div>
 @stop

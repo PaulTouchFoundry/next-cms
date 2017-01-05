@@ -118,7 +118,7 @@ class PageController extends BaseController
     
     public function delete(Request $request, $type, $page)
     {
-        $this->authorize('cms.page_delete');
+        $this->authorize('cms.page_destroy');
         
         $page->delete();
         return redirect()
