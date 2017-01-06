@@ -1,12 +1,14 @@
 language: php
 php:
-- 5.6
+- 7.0
 before_script:
+- mysql -e 'create database testing;'
 - composer config -g github-oauth.github.com ${GH_TOKEN}
 - composer install
 script:
 - php -l -d display_errors=0 src/
 - vendor/bin/phpcs -n --extensions=php --ignore='src/Database/Migrations' --standard=PSR2 --report=full src/
+- vendor/bin/phpunit -c phpunit.xml
 notifications:
   slack: wearenext:eukGbLuGciAoymXC4COwqkNo
 env:
