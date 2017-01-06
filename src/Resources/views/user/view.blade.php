@@ -15,7 +15,9 @@
         @endcan
     </div>
 
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
 
     <div class="l-section">
         @foreach($users as $user)

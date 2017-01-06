@@ -13,6 +13,8 @@ abstract class BaseController extends Controller
     
     public function __construct()
     {
-        $this->middleware(config('cms.auth.middleware'), ['except' => ['portal', 'login'],]);
+        if (!is_null(config('cms.auth.middleware'))) {
+            $this->middleware(config('cms.auth.middleware'), ['except' => ['portal', 'login'],]);
+        }
     }
 }

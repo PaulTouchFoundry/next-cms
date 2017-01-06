@@ -17,7 +17,9 @@
                 </div>
             </div>
         </div>
-        @include('cms::includes.alert', [ 'errors' => $errors ])
+        @if (isset($errors))
+            @include('cms::includes.alert', [ 'errors' => $errors ])
+        @endif
         <div class="l-section">
             <div class="l-content">
                 {!! CMSForm::open([ 'url' => route('cms.block.save_icon_list_block', ['cmsType' => $type->slug, 'cmsPage' => $page,]), 'id' => 'form-block', 'class' => "form ".($page->publish?'js-form-published-warn':'') ]) !!}

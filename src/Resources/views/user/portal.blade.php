@@ -6,7 +6,9 @@
 
 @section('content')
 <div class="l-wrapper l-wrapper--narrow">
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
     <div class="header header--primary">
         <div class="header__brand" style="background:{{ config('cms.brand.color') }}">
             {{ config('cms.brand.title') }}

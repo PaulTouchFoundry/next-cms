@@ -17,7 +17,9 @@
                 </div>
             </div>
         </div>
-        @include('cms::includes.alert', [ 'errors' => $errors ])
+        @if (isset($errors))
+            @include('cms::includes.alert', [ 'errors' => $errors ])
+        @endif
         <div class="l-section">
             <div class="l-content">
                 {!! CMSForm::open([ 'url' => route('cms.block.update_block', ['cmsBlock' => $block,]), 'id' => 'form-block', 'class' => "form ".($page->publish?'js-form-published-warn':'') ]) !!}
@@ -38,7 +40,7 @@
                         <label class="label label--checkbox" for="quicklink">
                             <input class="js-toggle-item" id="quicklink" name="quicklink" value="1" type="checkbox" data-toggle-id="title" {{ old('quicklink', $block->quicklink) ? 'checked="checked"' : '' }} data-input-focus="true">@lang('block.icon_list.fields.quicklink.label')
                         </label>
-                        {!! Form::wrapLabel('title', trans('block.icon_list.fields.title.label'), ['class' => 'label' . ($errors->has('title') ? ' has-error' : '') . (old('quicklink') || $block->quicklink ? '' : ' u-hidden'), 'id' => 'title']) !!}
+                        {!! Form::wrapLabel('title', trans('block.icon_list.fields.title.label'), ['class' => 'label' . ((isset($errors) && $errors->has('title')) ? ' has-error' : '') . (old('quicklink') || $block->quicklink ? '' : ' u-hidden'), 'id' => 'title']) !!}
                         {!! Form::text('title', $block->title, [ 'placeholder' => trans('block.icon_list.fields.title.placeholder'), 'maxlength' => '25' ]) !!}
                     @endif--}}
 

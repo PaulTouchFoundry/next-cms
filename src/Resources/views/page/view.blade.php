@@ -22,7 +22,9 @@
         </div>
     </div>
 
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
     
     @if (!empty($searchForm->field('q')->value('')))
     <p>{{ $pages->total() }} search {{ str_plural('result', $pages->total()) }} for <b>{{ $searchForm->field('q')->value() }}</b>:</p>

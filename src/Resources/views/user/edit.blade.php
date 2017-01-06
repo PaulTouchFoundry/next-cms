@@ -10,7 +10,9 @@
         <h3 class="hN">@lang('cms::user.edit.header', [ 'user' => $user->name ])</b></h3>
     </div>
     
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
 
     {!! CMSForm::open([ 'url' => route('cms.user.update', [ $user ]), 'id' => 'form-user', 'method' => 'post', 'id' => 'form-details' ]) !!}
         <div class="l-section">

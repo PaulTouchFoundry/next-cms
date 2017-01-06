@@ -10,7 +10,9 @@
 
 @section('content')
 <div class="l-wrapper">
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
     <div class="l-section">
         <div class="l-content">
             {!! CMSForm::open([ 'url' => route('cms.media.update'), 'id' => 'form-block', 'enctype' => 'multipart/form-data', 'class' => "form" ]) !!}

@@ -13,7 +13,9 @@
     <div class="header header--page">
         <h3 class="hN">@lang('cms::pagetype.edit.header') <b>{{ $pageType->label }}</b></h3>
     </div>
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
     <form class="form js-confirm-form" id="form-details" action="{{ route('cms.pagetype.update', [ 'cmsPageType' => $pageType ]) }}" method="post">
         @include('cms::pagetype.form', [ $form ])
         <div class="btn-group">

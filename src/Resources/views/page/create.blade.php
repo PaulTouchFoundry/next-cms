@@ -17,7 +17,9 @@
             </div>
         </div>
     </div>
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
     <form class="form js-confirm-form js-media-upload-form" id="form-details" action="{{ route('cms.page.save', [ 'cmsType' => $type->slug ]) }}" method="post">
         @include('cms::page.form', [ $form, $type ])
         <div class="btn-group">

@@ -17,7 +17,9 @@
                 </div>
             </div>
         </div>
-        @include('cms::includes.alert', [ 'errors' => $errors ])
+        @if (isset($errors))
+            @include('cms::includes.alert', [ 'errors' => $errors ])
+        @endif
         <div class="l-section">
             <div class="l-content">
                 {!! CMSForm::open([ 'url' => route('cms.block.save_text_block', ['cmsType' => $type->slug, 'cmsPage' => $page,]), 'id' => 'form-block' ]) !!}
@@ -37,7 +39,7 @@
                         <label class="label label--checkbox" for="quicklink">
                             <input class="js-toggle-item" id="quicklink" name="quicklink" value="1" type="checkbox" data-toggle-id="title" data-input-focus="true" checked="checked">@lang('cms::block.text.fields.quicklink.label')
                         </label>
-                        {!! CMSForm::wrapLabel('title', trans('cms::block.text.fields.title.label'), ['class' => 'label' . ($errors->get('title') ? ' has-error' : ''), 'id' => 'title']) !!}
+                        {!! CMSForm::wrapLabel('title', trans('cms::block.text.fields.title.label'), ['class' => 'label' . ((isset($errors) && $errors->get('title')) ? ' has-error' : ''), 'id' => 'title']) !!}
                         {!! CMSForm::text('title', null, [ 'placeholder' => trans('cms::block.text.fields.title.placeholder'), 'maxlength' => '25' ]) !!}
                     @endif--}}
 

@@ -10,7 +10,9 @@
         <h3 class="hN">@lang('cms::user.create.header')</h3>
     </div>
 
-    @include('cms::includes.alert', [ 'errors' => $errors ])
+    @if (isset($errors))
+        @include('cms::includes.alert', [ 'errors' => $errors ])
+    @endif
 
     {!! CMSForm::open([ 'url' => route('cms.user.save'), 'id' => 'form-user' ]) !!}
         <div class="l-section">
