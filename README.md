@@ -8,7 +8,7 @@
 
 Next CMS can be integrated into any Laravel 5.1 project by simply adding the [Service Provider](https://laravel.com/docs/5.1/packages#service-providers) to your project config/app.php.
 
-Since this CMS package is in a private repository you will need to configure Composer before downloading the next-cms dependency. In the `composer.json` file add the lines below the `{` opening character:
+Since this CMS package is in a private repository you will need to configure Composer before downloading the next-cms dependency. In the `composer.json` file add the following lines below the `{` opening character:
 
 ```json
     "repositories": [
@@ -25,14 +25,14 @@ To download the CMS package and add it to your Composer's dependency list run th
 composer require wearenext/next-cms
 ```
 
-Add the following to your Laravel projects `config/app.php` file, at the end of the `'providers' => [` array:
+Add this provider to your Laravel projects `config/app.php` file, at the end of the `'providers' => [` array:
 
 ```php
         Wearenext\CMS\ServiceProvider::class,
     ],
 ```
 
-*Important:* Add these two lines to the `'aliases' => [` array near the end of the same file:
+*Important:* Add these two lines to the `'aliases' => [` array near the end of that same file:
 
 ```php
         'CMSHtml'   => Wearenext\CMS\Support\Facades\HtmlFacade::class,
@@ -49,7 +49,7 @@ php artisan vendor:publish --tag=public
 
 ### Customization
 
-The primary customizable attributes in the CMS can modified by overriding configuration directives set in `config/cms.php`. By default the configuration file looks like this:
+Customizable attributes in the CMS can modified by overriding configuration directives set in `config/cms.php`. By default the configuration file looks like this:
 
 ```php
 return [
