@@ -98,7 +98,7 @@ return [
         'fields' => [
             'caption' => [
                 'label' => 'Caption',
-                'placeholder' => '',
+                'placeholder' => '(optional)',
             ],
         ],
         'controls' => [
@@ -113,7 +113,7 @@ return [
         'fields' => [
             'caption' => [
                 'label' => 'Caption',
-                'placeholder' => '',
+                'placeholder' => '(optional)',
             ],
         ],
         'controls' => [
