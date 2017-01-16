@@ -32,9 +32,16 @@
                     <a class="btn btn--small btn--bordered" href="#modal" data-toggle="modal" data-target="#modal" role="button">@lang('cms::page.fields.hero_image.select')</a>
                     <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'block',]) }}?from=block&block_id={{ $block->id }}">@lang('cms::page.fields.hero_image.manage')</a>
                 </div>
-                <div class="image js-media-select-preview{{ (is_null($block->media->first())?' u-hidden':'') }}">
-                    <input class="input" name="media_id" type="hidden" value="{{ array_get($block->media->first(), 'id') }}">
-                    <img src="{{ (!is_null($block->media->first())?$block->media->first()->getURL():'') }}" width="787" alt="" />
+                <?php
+                if (!is_null(request('media_id'))) {
+                    $media = Wearenext\CMS\Models\Media::find(request('media_id'));
+                } else {
+                    $media = $block->media->first();
+                }
+                ?>
+                <div class="image js-media-select-preview{{ (is_null($media)?' u-hidden':'') }}">
+                    <input class="input" name="media_id" type="hidden" value="{{ data_get($media, 'id') }}">
+                    <img src="{{ (!is_null($media)?$media->getURL():'') }}" width="787" alt="" />
                     <a class="image__remove js-media-deselect" href="#"><span class="icon fa fa-minus" title="Remove" aria-hidden="true"></span></a>
                 </div>
                 

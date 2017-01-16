@@ -31,10 +31,17 @@
                     <a class="btn btn--small btn--bordered" href="#modal" data-toggle="modal" data-target="#modal" role="button">@lang('cms::page.fields.hero_image.select')</a>
                     <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'block',]) }}?from=block&page_id={{ $page->id }}">@lang('cms::page.fields.hero_image.manage')</a>
                 </div>
-                <div class="js-media-select-preview image u-hidden">
-                    <input class="input" name="media_id" type="hidden">
-                    <img src="" alt="" width="787">
-                    <a class="image__remove js-media-deselect"><span class="icon fa fa-close" title="Remove" aria-hidden="true"></span></a>
+                <?php
+                if (!is_null(request('media_id'))) {
+                    $media = Wearenext\CMS\Models\Media::find(request('media_id'));
+                } else {
+                    $media = null;
+                }
+                ?>
+                <div class="image js-media-select-preview{{ (is_null($media)?' u-hidden':'') }}">
+                    <input class="input" name="media_id" type="hidden" value="{{ data_get($media, 'id') }}">
+                    <img src="{{ (!is_null($media)?$media->getURL():'') }}" width="787" alt="" />
+                    <a class="image__remove js-media-deselect" href="#"><span class="icon fa fa-minus" title="Remove" aria-hidden="true"></span></a>
                 </div>
 
                 {!! CMSForm::wrapLabel('headline', trans('cms::block.media_image.fields.caption.label')) !!}

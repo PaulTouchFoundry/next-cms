@@ -30,6 +30,18 @@ class MediaController extends BaseController
                 $media->filename = str_limit($file->getClientOriginalName());
 
                 $media->save();
+                
+                $back = $this->generateBackUrl();
+                
+                if (!is_null($back)) {
+                    $errors = [
+                        'warning' => [
+                            'Image has been selected but '.(request('from') == 'block'?'block':'page').' has not been saved.',
+                        ],
+                    ];
+                    return redirect("{$back}?media_id={$media->id}")
+                        ->withErrors($errors);
+                }
             }
             $errors = [
                 'success' => [

@@ -19,6 +19,18 @@
             {!! CMSForm::input('hidden', 'tag', $tag) !!}
             <fieldset class="fieldset fieldset--bordered">
                 <legend class="legend">Upload media</legend>
+                @unless (is_null(request('from')))
+                {!! CMSForm::hidden('from', request('from')) !!}
+                @endunless
+                @unless (is_null(request('page_id')))
+                {!! CMSForm::hidden('page_id', request('page_id')) !!}
+                @endunless
+                @unless (is_null(request('block_id')))
+                {!! CMSForm::hidden('block_id', request('block_id')) !!}
+                @endunless
+                @unless (is_null(request('pagetype_id')))
+                {!! CMSForm::hidden('pagetype_id', request('pagetype_id')) !!}
+                @endunless
                 <div class="btn-group btn-group--left">
                     {!! CMSForm::file('media_file', [ 'class' => 'js-media-input' ]) !!}
                     <a class="btn btn--transparent" href="#modal" data-toggle="modal" data-target="#modal" role="button">Choose a image to replace</a>
