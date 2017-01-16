@@ -65,7 +65,7 @@
             </div>
             <div class="btn-group btn-group--left">
                 <a class="btn btn--small btn--bordered" href="#modal" data-toggle="modal" data-target="#modal" role="button">@lang('cms::page.fields.hero_image.select')</a>
-                <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'hero',]) }}">@lang('cms::page.fields.hero_image.manage')</a>
+                <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'hero',]) }}?from=page&pagetype_id={{ $type->id }}{{ (isset($page)?'&page_id='.$page->id:'') }}">@lang('cms::page.fields.hero_image.manage')</a>
             </div>
         @endif
     </div>

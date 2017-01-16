@@ -29,7 +29,7 @@
                 
                 <div class="btn-group btn-group--left">
                     <a class="btn btn--small btn--bordered" href="#modal" data-toggle="modal" data-target="#modal" role="button">@lang('cms::page.fields.hero_image.select')</a>
-                    <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'block',]) }}">@lang('cms::page.fields.hero_image.manage')</a>
+                    <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'block',]) }}?from=block&page_id={{ $page->id }}">@lang('cms::page.fields.hero_image.manage')</a>
                 </div>
                 <div class="js-media-select-preview image u-hidden">
                     <input class="input" name="media_id" type="hidden">
