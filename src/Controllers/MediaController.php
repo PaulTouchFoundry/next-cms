@@ -78,6 +78,12 @@ class MediaController extends BaseController
                     return route('cms.block.create_media_image_block', [ 'cmsType' => $page->type->slug, 'cmsPage' => $page->id, ]);
                 }
                 break;
+            case 'featured_block':
+                if (request()->has('page_id')) {
+                    $page = Page::findOrFail(request()->has('page_id'));
+                    return route('cms.block.create_featured_block', [ 'cmsType' => $page->type->slug, 'cmsPage' => $page->id, ]);
+                }
+                break;
         }
     }
 

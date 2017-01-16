@@ -30,14 +30,16 @@
 
                 <div class="btn-group btn-group--left">
                     <a class="btn btn--small btn--bordered" href="#modal" data-toggle="modal" data-target="#modal" role="button">@lang('cms::page.fields.hero_image.select')</a>
-                    <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'block',]) }}">@lang('cms::page.fields.hero_image.manage')</a>
+                    <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'block',]) }}?from=block&block_id={{ $block->id }}">@lang('cms::page.fields.hero_image.manage')</a>
                 </div>
                 <div class="image js-media-select-preview{{ (is_null($block->media->first())?' u-hidden':'') }}">
                     <input class="input" name="media_id" type="hidden" value="{{ array_get($block->media->first(), 'id') }}">
                     <img src="{{ (!is_null($block->media->first())?$block->media->first()->getURL():'') }}" width="787" alt="" />
                     <a class="image__remove js-media-deselect" href="#"><span class="icon fa fa-minus" title="Remove" aria-hidden="true"></span></a>
                 </div>
-
+                
+                {!! CMSForm::wrapLabel('headline', trans('cms::block.featured.fields.caption.label')) !!}
+                {!! CMSForm::text('headline', $block->headline, [ 'placeholder' => trans('cms::block.featured.fields.caption.placeholder') ]) !!}
                 <div class="btn-group">
                     <a href="{{ $page->blockUrl() }}" class="btn btn--transparent" role="button">@lang('cms::controls.cancel')</a>
                     {!! CMSForm::submit(trans('cms::block.featured.controls.update')) !!}

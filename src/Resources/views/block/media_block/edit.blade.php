@@ -37,7 +37,9 @@
                     <img src="{{ (!is_null($block->media->first())?$block->media->first()->getURL():'') }}" width="787" alt="" />
                     <a class="image__remove js-media-deselect" href="#"><span class="icon fa fa-minus" title="Remove" aria-hidden="true"></span></a>
                 </div>
-
+                
+                {!! CMSForm::wrapLabel('headline', trans('cms::block.media_image.fields.caption.label')) !!}
+                {!! CMSForm::text('headline', $block->headline, [ 'placeholder' => trans('cms::block.media_image.fields.caption.placeholder') ]) !!}
                 <div class="btn-group">
                     <a href="{{ $page->blockUrl() }}" class="btn btn--transparent" role="button">@lang('cms::controls.cancel')</a>
                     {!! CMSForm::submit(trans('cms::block.media_image.controls.update')) !!}

@@ -37,6 +37,8 @@
                     <a class="image__remove js-media-deselect"><span class="icon fa fa-close" title="Remove" aria-hidden="true"></span></a>
                 </div>
 
+                {!! CMSForm::wrapLabel('headline', trans('cms::block.media_image.fields.caption.label')) !!}
+                {!! CMSForm::text('headline', null, [ 'placeholder' => trans('cms::block.media_image.fields.caption.placeholder') ]) !!}
                     <div class="btn-group">
                         <a href="{{ $page->blockUrl() }}" class="btn btn--transparent" role="button">@lang('cms::controls.cancel')</a>
                         {!! CMSForm::submit(trans('cms::block.media_image.controls.create')) !!}

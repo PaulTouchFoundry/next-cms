@@ -95,6 +95,12 @@ return [
     'media_image' => [
         'label' => 'Image Block',
         'legend' => 'Image Block',
+        'fields' => [
+            'caption' => [
+                'label' => 'Caption',
+                'placeholder' => '',
+            ],
+        ],
         'controls' => [
             'create' => 'Create Image Block',
             'update' => 'Update Image Block',
@@ -104,6 +110,12 @@ return [
     'featured' => [
         'label' => 'Featured Image',
         'legend' => 'Featured Image',
+        'fields' => [
+            'caption' => [
+                'label' => 'Caption',
+                'placeholder' => '',
+            ],
+        ],
         'controls' => [
             'create' => 'Create Featured Image',
             'update' => 'Update Featured Image',
