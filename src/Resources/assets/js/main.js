@@ -786,6 +786,103 @@ SITENAME = {
                     $newLabel.focus();
                 });
             });
+
+            /* ==========================================================================
+             Table editor
+             ========================================================================== */
+
+            var $tableEditor = $('.js-table-editor');
+
+            $tableEditor.each(function() {
+                var $table = $('.table');
+                var $rows = $('input[name=table-editor-rows]');
+                var $cols = $('input[name=table-editor-cols]');
+                
+                
+                var buildOutput = function () {
+                    var output = [];
+                    var i = 0;
+                    $.each($table.find('tr'), function () {
+                        var rowOutput = [];
+                        var j = 0;
+                        var $ths = $(this);
+                        $.each($ths.find('th, td'), function () {
+                            rowOutput[j] = $(this).text();
+                            j++;
+                        }).promise().done(function() {
+                            // Add data
+                            output[i] = rowOutput;
+                        });
+                        i++;
+                    }).promise().done(function() {
+                        console.log(output);
+                        $('.js-table-editor-output').val(JSON.stringify(output));
+                    });
+                };
+                
+                var update = function () {
+                    var rows = parseInt($rows.val());
+                    var cols = parseInt($cols.val());
+                    
+                    if (rows < 1) {
+                        rows = 1;
+                    }
+                    
+                    if (cols < 1) {
+                        cols = 1;
+                    }
+                    
+                    if (rows > 100) {
+                        rows = 100;
+                    }
+                    
+                    if (cols > 30) {
+                        cols = 30;
+                    }
+                    
+                    var i = 0;
+                    $.each($table.find('tr'), function () {
+                        if (i >= rows) {
+                            $(this).remove();
+                        } else {
+                            var j = 0;
+                            var $ths = $(this);
+                            $.each($ths.find('th, td'), function () {
+                                if (j >= cols) {
+                                    $(this).unbind('keypress').remove();
+                                } else {
+                                    $(this).attr('contenteditable', 'true');
+                                }
+                                j++;
+                            }).promise().done(function() {
+                                while (j < cols) {
+                                    if (i === 0) {
+                                        $ths.append($('<th contenteditable="true"></th>'));
+                                    } else {
+                                        $ths.append($('<td contenteditable="true"></td>'));
+                                    }
+                                    j++;
+                                }
+                            });
+                        }
+                        i++;
+                    }).promise().done(function() {
+                        while (i < rows) {
+                            $('.table tbody').append($('<tr>'+('<td contenteditable="true"> </td>'.repeat(cols))+'</tr>'));
+                            i++;
+                        }
+                        $('.table thead tr th').unbind('keypress').on('keypress', buildOutput);
+                        $('.table tbody tr td').unbind('keypress').on('keypress', buildOutput);
+                        $('input[name=table-editor-rows]').val(rows+'');
+                        $('input[name=table-editor-cols]').val(cols+'');
+                        buildOutput();
+                    });
+                };
+                
+                update();
+                
+                $('.js-table-resize').click(update);
+            });
         }
     },
 

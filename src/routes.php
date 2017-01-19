@@ -38,6 +38,9 @@ Route::post('/page/{cmsType}/{cmsPage}/featured_block', [ 'uses' => "{$blockCont
 Route::get('/page/{cmsType}/{cmsPage}/embed_block', [ 'uses' => "{$blockController}@createEmbedBlock", 'as' => 'cms.block.create_embed_block' ]);
 Route::post('/page/{cmsType}/{cmsPage}/embed_block', [ 'uses' => "{$blockController}@saveEmbedBlock", 'as' => 'cms.block.save_embed_block' ]);
 
+Route::get('/page/{cmsType}/{cmsPage}/table_block', [ 'uses' => "{$blockController}@createTableBlock", 'as' => 'cms.block.create_table_block' ]);
+Route::post('/page/{cmsType}/{cmsPage}/table_block', [ 'uses' => "{$blockController}@saveTableBlock", 'as' => 'cms.block.save_table_block' ]);
+
 Route::get('/block/{cmsBlock}/edit', [ 'uses' => "{$blockController}@editBlock", 'as' => 'cms.block.edit_block' ]);
 Route::post('/block/{cmsBlock}/edit', [ 'uses' => "{$blockController}@updateBlock", 'as' => 'cms.block.update_block' ]);
 Route::post('/block/{cmsBlock}/delete', [ 'uses' => "{$blockController}@deleteBlock", 'as' => 'cms.block.delete_block' ]);

@@ -75,6 +75,8 @@ class BlockController extends BaseController
                 return $this->updateEmbedBlock($request, $block);
             case Block::TYPE_FEATURED:
                 return $this->updateFeaturedBlock($request, $block);
+            case Block::TYPE_TABLE:
+                return $this->updateTableBlock($request, $block);
             default:
                 throw new ErrorException("Updating block type '{$block->block_type}' is not possible");
         }
@@ -363,6 +365,48 @@ class BlockController extends BaseController
 
         return back()
             ->withErrors([ 'success' => [ trans('cms::block.messages.embed_block_updated') ] ]);
+    }
+
+    /*
+     * Table Block methods
+     */
+
+    public function createTableBlock($type, $page)
+    {
+        return view('cms::block.table_block.create')
+            ->with('type', $type)
+            ->with('page', $page);
+    }
+
+    public function saveTableBlock(Request $request, $type, $page)
+    {
+        if ($this->hasBlockQuota($type, $page)) {
+            return redirect()
+                ->to($page->blockUrl())
+                ->withErrors([ 'success' => [ trans('cms::block.messages.block_quota') ] ]);
+        }
+
+        $attributes = $request->all();
+
+        $attributes['block_type'] = Block::TYPE_TABLE;
+
+        $block = $page->blocks()->create($attributes);
+
+        $this->appendBlockPage($page, $block);
+
+        return redirect()
+            ->to($page->blockUrl())
+            ->withErrors([ 'success' => [ trans('cms::block.messages.table_block_saved') ] ]);
+    }
+
+    protected function updateTableBlock(Request $request, $block)
+    {
+        $block->fill($request->all());
+
+        $block->save();
+
+        return back()
+            ->withErrors([ 'success' => [ trans('cms::block.messages.table_block_updated') ] ]);
     }
     
     protected function hasBlockQuota($type, $page)

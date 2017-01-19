@@ -152,7 +152,10 @@
                 <input type="checkbox" id="block-featured" name="blocks[featured]" value="1"{!! $form->field('blocks.featured')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.featured')
             </label>
             <label class="label label--checkbox label--inline" for="callout">
-                <input type="checkbox" id="callout" name="callout" value="1"{!! $form->field('callout')->checked(true) !!}/> @lang('cms::pagetype.fields.callout.text')
+                <input type="checkbox" id="callout" name="callout" value="1"{!! $form->field('callout')->checked(true) !!}/> @lang('cms::pagetype.fields.blocktypes.callout')
+            </label>
+            <label class="label label--checkbox label--inline" for="block-table">
+                <input type="checkbox" id="block-table" name="blocks[table]" value="1"{!! $form->field('blocks.table')->checked() !!}/> @lang('cms::pagetype.fields.blocktypes.table')
             </label>
         </fieldset>
     </div>
