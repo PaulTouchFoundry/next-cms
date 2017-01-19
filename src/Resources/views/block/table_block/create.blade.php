@@ -22,7 +22,7 @@
         @endif
         <div class="l-section">
             <div class="l-content">
-                {!! CMSForm::open([ 'url' => route('cms.block.save_text_block', ['cmsType' => $type->slug, 'cmsPage' => $page,]), 'id' => 'form-block' ]) !!}
+                {!! CMSForm::open([ 'url' => route('cms.block.save_table_block', ['cmsType' => $type->slug, 'cmsPage' => $page,]), 'id' => 'form-block' ]) !!}
                 <fieldset class="fieldset fieldset--bordered">
                     <legend class="legend">@lang('cms::block.table.legend')</legend>
                     
