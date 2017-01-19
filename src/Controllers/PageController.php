@@ -7,6 +7,7 @@ use Wearenext\CMS\Models\PageType;
 use Wearenext\CMS\Models\Page;
 use Wearenext\CMS\Models\PageRelation;
 use Wearenext\CMS\Support\Html\Form;
+use Carbon\Carbon;
 
 class PageController extends BaseController
 {
@@ -130,6 +131,7 @@ class PageController extends BaseController
     {
         $this->authorize('cms.page_publish');
         
+        $page->published_at = Carbon::now();
         $page->published = true;
         $page->save();
 
