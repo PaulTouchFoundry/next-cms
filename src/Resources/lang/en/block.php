@@ -137,4 +137,28 @@ return [
             'delete' => 'Delete HTML Block',
         ],
     ],
+    'table' => [
+        'label' => 'Table Block',
+        'legend' => 'Table Block',
+        'fields' => [
+            'headline' => [
+                'label' => 'Headline',
+                'placeholder' => '',
+            ],
+            'cols' => [
+                'label' => 'Columns',
+                'placeholder' => '',
+            ],
+            'rows' => [
+                'label' => 'Rows',
+                'placeholder' => '',
+            ],
+        ],
+        'controls' => [
+            'create' => 'Create Table Block',
+            'update' => 'Update Table Block',
+            'delete' => 'Delete Table Block',
+            'resize' => 'Resize',
+        ],
+    ],
 ];
