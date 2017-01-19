@@ -27,6 +27,9 @@
                 <fieldset class="fieldset fieldset--bordered">
                     <legend class="legend">@lang('cms::block.table.legend')</legend>
                     
+                    {!! CMSForm::wrapLabel('headline', trans('cms::block.table.fields.headline.label')) !!}
+                    {!! CMSForm::text('headline', $block->headline, [ 'placeholder' => trans('cms::block.table.fields.headline.placeholder'), 'autofocus' => 'autofocus' ]) !!}
+                    
                     <?php
                     $table = json_decode($block->content, true);
                     if (!is_array($table)) {

@@ -26,6 +26,9 @@
                 <fieldset class="fieldset fieldset--bordered">
                     <legend class="legend">@lang('cms::block.table.legend')</legend>
                     
+                    {!! CMSForm::wrapLabel('headline', trans('cms::block.table.fields.headline.label')) !!}
+                    {!! CMSForm::text('headline', null, [ 'placeholder' => trans('cms::block.table.fields.headline.placeholder'), 'autofocus' => 'autofocus' ]) !!}
+                    
                     <div class="js-table-editor">
                         <caption class="table__caption">Editable table click to edit contents</caption>
                         <table class="table">

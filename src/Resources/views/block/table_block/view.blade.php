@@ -3,6 +3,7 @@
         <a class="card__link" href="{{ route('cms.block.edit_block', ['cmsBlock' => $block,]) }}">
             <input type="hidden" name="blocks[]" value="{{ $block->id }}" />
             <div class="card__type">Table Block</div>
+            <h3 class="card__title">{{ $block->headline }}</h3>
             <p class="card__synopsis">
                 <?php
                 $table = json_decode($block->content, true);
