@@ -58,6 +58,11 @@ class Page extends BaseModel
         return $this->hasOne(Features\Product::class);
     }
     
+    public function pageKeyFeatures()
+    {
+        return $this->hasOne(Features\KeyFeatures::class);
+    }
+    
     public function urls()
     {
         return $this->hasMany(Url::class);

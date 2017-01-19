@@ -94,17 +94,30 @@
 @if ($type->hasFeature('page_key_features'))
 <div class="l-section">
     <div class="l-content">
-        <h4>{{ $type->field('page_features.label') }}</h4>
-        @foreach ($form->field('pageFeatures.key_features')->value([]) as $key => $value)
-        <label class="{{ $form->field("pageFeatures.key_features.{$key}")->labelClass() }}" for="feature-{{ $key }}">
-            <span class="u-visuallyhidden">{{ $type->field('page_features.label') }}</span>
-            <input class="input" type="text" id="feature-{{ $key }}" name="key_features[]" maxlength="50" placeholder="{{ $type->field('page_features.placeholder') }}" value="{{ $value }}" />
-            {!! $form->field("pageFeatures.key_features.{$key}")->helpHtml() !!}
+        <h4>{{ $type->field('page_key_features.label') }}</h4>
+        <?php
+        $features = null;
+        if (isset($page)) {
+            $features = $page->pageKeyFeatures;
+            if (!is_null($features)) {
+                $features = $features->key_features;
+            }
+        }
+        
+        if (!is_array($features)) {
+            $features = [];
+        }
+        ?>
+        @foreach ($features as $key => $value)
+        <label class="{{ $form->field("pageKeyFeatures.key_features.{$key}")->labelClass() }}" for="feature-{{ $key }}">
+            <span class="u-visuallyhidden">{{ $type->field('page_key_features.label') }}</span>
+            <input class="input" type="text" id="feature-{{ $key }}" name="key_features[]" maxlength="50" placeholder="{{ $type->field('page_key_features.placeholder') }}" value="{{ $value }}" />
+            {!! $form->field("pageKeyFeatures.key_features.{$key}")->helpHtml() !!}
         </label>
         @endforeach
-        <label class="label js-feature-entry" for="feature-id" data-clonekey="{{ count($form->field('pageFeatures.key_features')->value([])) }}">
-            <span class="u-visuallyhidden">{{ $type->field('page_features.label') }}</span>
-            <input class="input" type="text" id="feature-id" name="key_features[]" maxlength="50" placeholder="{{ $type->field('page_features.placeholder') }}" />
+        <label class="label js-feature-entry" for="feature-id" data-clonekey="{{ count($features) }}">
+            <span class="u-visuallyhidden">{{ $type->field('page_key_features.label') }}</span>
+            <input class="input" type="text" id="feature-id" name="key_features[]" maxlength="50" placeholder="{{ $type->field('page_key_features.placeholder') }}" />
         </label>
 
         <button class="btn btn--bordered btn--icon btn--small js-clone-entry-add" type="button" data-clone="js-feature-entry"><span class="icon icon--left fa fa-plus" title="Add" aria-hidden="true"></span>Feature</button>

@@ -57,6 +57,10 @@ return [
             'label' => 'Disclaimer',
             'placeholder' => '',
         ],
+        'page_key_features' => [
+            'label' => 'Key Features',
+            'placeholder' => '',
+        ],
     ],
     'messages' => [
         'published' => ':name has been published. <a class="alert__link" href=":preview" target="_blank">Check it out</a>.',
