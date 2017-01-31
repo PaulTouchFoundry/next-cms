@@ -68,14 +68,14 @@ class Page extends BaseModel
         return $this->hasMany(Url::class);
     }
     
-    public function resolveSummary()
+    public function resolveSummary($limit = 100, $end = '...', $default = 'No synopsis available')
     {
         foreach ($this->getBlockGenerator() as $block) {
             if ($block->block_type == Block::TYPE_TEXT) {
-                return str_limit(strip_tags($block->content));
+                return str_limit(strip_tags($block->content), $limit, $end);
             }
         }
-        return 'No synopsis available';
+        return $default;
     }
 
     public function getBlockGenerator()
