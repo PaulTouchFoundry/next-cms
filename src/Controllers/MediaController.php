@@ -31,6 +31,10 @@ class MediaController extends BaseController
 
                 $media->save();
                 
+                if (!is_null(config('cms.cloudinary.store')) && !is_null(config('cms.cloudinary.thumb_store'))) {
+                    $this->storeLocally($media);
+                }
+                
                 $back = $this->generateBackUrl();
                 
                 if (!is_null($back)) {
@@ -107,5 +111,17 @@ class MediaController extends BaseController
             $url = 'http://res.cloudinary.com/du9dtwhdr/';
             return str_replace($url, '', array_get($data, 'url', ''));
         }
+    }
+    
+    protected function storeLocally(Media $m)
+    {
+        $store = config('cms.cloudinary.store');
+        $thumbStore = config('cms.cloudinary.thumb_store');
+
+        $remote = $m->getURL(true);
+        $thumbRemote = $m->getThumb(true);
+        $name = basename($m->url);
+        file_put_contents("{$store}/{$name}", file_get_contents($remote));
+        file_put_contents("{$thumbStore}/{$name}", file_get_contents($thumbRemote));
     }
 }
