@@ -27,7 +27,7 @@ class Media extends BaseModel
             return "{$resource}/".basename($this->url);
         }
         
-        return "https://res.cloudinary.com/du9dtwhdr/". str_replace(
+        return "https://res.cloudinary.com/".config('services.cloudinary.cloud_name')."/". str_replace(
             'image/upload',
             'image/upload/t_media_lib_thumb',
             $this->url
@@ -41,6 +41,6 @@ class Media extends BaseModel
             return "{$resource}/".basename($this->url);
         }
         
-        return "https://res.cloudinary.com/du9dtwhdr/{$this->url}";
+        return "https://res.cloudinary.com/".config('services.cloudinary.cloud_name')."/{$this->url}";
     }
 }

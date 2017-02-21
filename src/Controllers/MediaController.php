@@ -108,7 +108,7 @@ class MediaController extends BaseController
         $data = Uploader::upload($upload->getPathname());
 
         if (array_has($data, 'url')) {
-            $url = 'http://res.cloudinary.com/du9dtwhdr/';
+            $url = "http://res.cloudinary.com/".config('services.cloudinary.cloud_name')."/";
             return str_replace($url, '', array_get($data, 'url', ''));
         }
     }
