@@ -56,6 +56,21 @@ class PageType extends BaseModel
         $this->attributes['relations'] = json_encode(array_values($this->setArrayAttribute($values)));
     }
     
+    public function getRelationsAttribute()
+    {
+        $relations = array_get($this->attributes, 'relations');
+        
+        if (is_null($relations)) {
+            $relations = [];
+        }
+        
+        if (!is_array($relations)) {
+            $relations = json_decode($relations, true);
+        }
+        
+        return $relations;
+    }
+    
     public function scopeSlug($query, $slug)
     {
         return $query->where('slug', $slug);

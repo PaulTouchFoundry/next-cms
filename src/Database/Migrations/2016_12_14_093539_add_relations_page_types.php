@@ -13,7 +13,7 @@ class AddRelationsPageTypes extends Migration
     public function up()
     {
         Schema::table('page_types', function (Blueprint $table) {
-            $table->json('relations')->default('[]');
+            $table->json('relations')->nullable();
         });
     }
 
