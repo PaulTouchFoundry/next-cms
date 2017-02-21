@@ -1,8 +1,6 @@
-[![Next](https://wearenext.co.za/images/logos/logo-next-74x28.png)](https://www.wearenext.co.za)
+[![Next](https://raw.githubusercontent.com/we-were-next/next-cms/master/logo-next-74x28.png)](https://github.com/we-were-next)
 
 ## Next CMS
-
-[![Build Status](https://travis-ci.com/we-are-next/next-cms.svg?token=5n1iuBDPPqhG9V382jtf&branch=master)](https://travis-ci.com/we-are-next/next-cms)
 
 ### Installation
 
