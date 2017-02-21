@@ -8,21 +8,10 @@
 
 Next CMS can be integrated into any Laravel 5.1 project by simply adding the [Service Provider](https://laravel.com/docs/5.1/packages#service-providers) to your project config/app.php.
 
-Since this CMS package is in a private repository you will need to configure Composer before downloading the next-cms dependency. In the `composer.json` file add the following lines below the `{` opening character:
-
-```json
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:we-are-next/next-cms.git"
-        }
-    ],
-```
-
 To download the CMS package and add it to your Composer's dependency list run this command:
 
 ```sh
-composer require wearenext/next-cms
+composer require wewerenext/next-cms
 ```
 
 Add this provider to your Laravel projects `config/app.php` file, at the end of the `'providers' => [` array:

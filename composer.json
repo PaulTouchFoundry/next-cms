@@ -1,5 +1,5 @@
 {
-    "name": "wearenext/next-cms",
+    "name": "wewerenext/next-cms",
     "type": "library",
     "autoload": {
         "psr-4": {
