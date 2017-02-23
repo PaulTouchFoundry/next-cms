@@ -32,5 +32,10 @@ return [
         'thumb_store' => null,
         'resource' => null,
         'resource_thumb' => null,
-    ]
+    ],
+    
+    'docs' => [
+        'path' => null,
+        'resource' => null,
+    ],
 ];

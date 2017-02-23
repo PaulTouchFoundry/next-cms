@@ -11,6 +11,11 @@
             @can('cms.user_index')
                 <li{!! (isset($userPage)?' class="is-active"':'') !!}><a href="{{ route('cms.user.index') }}">Users</a></li>
             @endcan
+            @can('cms.doc_index')
+                @unless (is_null(config('cms.docs.store')))
+                <li{!! (isset($docPage)?' class="is-active"':'') !!}><a href="{{ route('cms.doc.index') }}">Docs</a></li>
+                @endunless
+            @endcan
         </ol>
         <ol class="list list--utils">
             @can('cms.user_edit')

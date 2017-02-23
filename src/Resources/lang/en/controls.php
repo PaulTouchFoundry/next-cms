@@ -7,4 +7,5 @@ return [
     'publish' => 'Publish',
     'unpublish' => 'Unpublish',
     'cancel' => 'Cancel',
+    'delete' => 'Delete',
 ];

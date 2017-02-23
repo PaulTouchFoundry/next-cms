@@ -172,6 +172,10 @@ class ServiceProvider extends BaseProvider
         $gate->define('cms.pagetype_edit', $this->allows(false));
         // Page Type Destroy
         $gate->define('cms.pagetype_delete', $this->allows(false));
+        // Doc Create
+        $gate->define('cms.doc_create', $this->allows(false));
+        // Doc Index
+        $gate->define('cms.doc_index', $this->allows(false));
     }
     
     protected function allows($author)

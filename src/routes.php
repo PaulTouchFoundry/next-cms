@@ -6,6 +6,7 @@ $blockController = 'Wearenext\CMS\Controllers\BlockController';
 $mediaController = 'Wearenext\CMS\Controllers\MediaController';
 $userController = 'Wearenext\CMS\Controllers\UserController';
 $calloutController = 'Wearenext\CMS\Controllers\CalloutController';
+$docController = 'Wearenext\CMS\Controllers\DocsController';
 
 Route::get('/', [ 'uses' => "{$pageController}@index", 'as' => 'cms.index' ]);
 Route::get('/page', [ 'uses' => "{$pageController}@index", 'as' => 'cms.page.index' ]);
@@ -71,3 +72,9 @@ Route::post('/page/{cmsType}/{cmsPage}/callout', [ 'uses' => "{$calloutControlle
 Route::get('/page/{cmsType}/{cmsPage}/{cmsCallout}/edit', [ 'uses' => "{$calloutController}@edit", 'as' => 'cms.callout.edit' ]);
 Route::post('/page/{cmsType}/{cmsPage}/{cmsCallout}/edit', [ 'uses' => "{$calloutController}@update", 'as' => 'cms.callout.update' ]);
 Route::post('/page/{cmsType}/{cmsPage}/{cmsCallout}/delete', [ 'uses' => "{$calloutController}@delete", 'as' => 'cms.callout.delete' ]);
+
+Route::get('/docs', [ 'uses' => "{$docController}@index", 'as' => 'cms.doc.index' ]);
+Route::get('/docs/{id}/view', [ 'uses' => "{$docController}@view", 'as' => 'cms.doc.view' ]);
+Route::get('/docs/{id}/{hash}/delete', [ 'uses' => "{$docController}@delete", 'as' => 'cms.doc.delete' ]);
+Route::get('/docs/upload', [ 'uses' => "{$docController}@getUpload", 'as' => 'cms.doc.upload' ]);
+Route::post('/docs/upload', [ 'uses' => "{$docController}@postUpload", 'as' => 'cms.doc.upload_post' ]);
