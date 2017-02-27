@@ -31,6 +31,9 @@ class PageController extends BaseController
         if (!empty($searchQuery = $request->get('q', ''))) {
             $query->where('name', 'LIKE', "%{$searchQuery}%");
         }
+        
+        $query->orderBy('updated_at', 'DESC');
+        
         return view('cms::page.view')
             ->with('type', $type)
             ->with('pages', $query->paginate());
