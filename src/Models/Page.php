@@ -14,6 +14,7 @@ class Page extends BaseModel
         'features',
         'published',
         'published_at',
+        'custom_date'
     ];
     
     protected $casts = [
@@ -26,6 +27,7 @@ class Page extends BaseModel
         'created_at',
         'updated_at',
         'deleted_at',
+        'custom_dates'
     ];
 
     public function type()

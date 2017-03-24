@@ -41,6 +41,10 @@ return [
             'label' => 'Description',
             'placeholder' => '',
         ],
+        'meta_custom_date' => [
+            'label' => 'Custom Date',
+            'placeholder' => '',
+        ],
         'product_premium' => [
             'label' => 'Premium',
             'placeholder' => 'e.g. 150',
