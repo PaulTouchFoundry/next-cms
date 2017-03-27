@@ -7,6 +7,14 @@
 <script src="{{ url('/vendor/cms/js/plugins.js') }}"></script>
 <script src="{{ url('/vendor/cms/js/main.js') }}"></script>
 <script src="{{ url('/vendor/cms/js/text.js') }}"></script>
+<script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js') }}"></script>
+<script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js') }}"></script>
+<script type="text/javascript">
+    var picker = new Pikaday({
+        field: $('#custom_date')[0],
+        format: 'YYYY-MM-DD'
+    });
+</script>
 
 <script>UTIL.init();</script>
 

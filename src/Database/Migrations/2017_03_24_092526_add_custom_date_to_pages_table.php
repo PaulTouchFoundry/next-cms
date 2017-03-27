@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddBlogDateToPagesTable extends Migration
+class AddCustomDateToPagesTable extends Migration
 {
     /**
      * Run the migrations.

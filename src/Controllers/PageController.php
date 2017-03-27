@@ -53,8 +53,13 @@ class PageController extends BaseController
     public function edit(Request $request, $type, $page)
     {
         $this->authorize('cms.page_edit');
-        
+
+        $date = new \DateTime($page->custom_date);
+
+        $page->custom_date = $date->format('Y-m-d');
+
         $form = new Form($page->toArray());
+
         return view('cms::page.edit')
             ->with('type', $type)
             ->with('page', $page)
@@ -101,7 +106,14 @@ class PageController extends BaseController
         ]);
 
         $attributes = $request->all();
-        
+
+        if (array_get($attributes, 'custom_date') === '') {
+            $attributes['custom_date'] = null;
+        } else {
+            $dateTime = $this->setDateTime(array_get($attributes, 'custom_date'));
+            $attributes['custom_date'] = $dateTime;
+        }
+
         $attributes['features'] = $type->features;
 
         $page->fill($attributes);
@@ -185,6 +197,14 @@ class PageController extends BaseController
                 }
             }
         }
+    }
+
+    protected function setDateTime($date)
+    {
+        $dt = Carbon::now();
+        $time = $dt->format('H:i:s');
+        $dateTime = $date.' '.$time;
+        return $dateTime;
     }
 
     protected function paths($paths, $page)

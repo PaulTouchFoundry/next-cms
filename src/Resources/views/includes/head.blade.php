@@ -30,6 +30,7 @@
 <!-- Style Sheets -->
 
 <link rel="stylesheet" href="{{ url('/vendor/cms/css/style-dfeddee.css') }}" />
+<link rel="stylesheet" href="{{ url('https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/css/pikaday.min.css') }}" />
 
 
 <!--[if lt IE 9]>

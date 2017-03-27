@@ -170,10 +170,9 @@ if (isset($page)) {
             <input class="input" type="text" id="meta_description" name="{{ $form->field('meta_description')->name() }}" maxlength="255" placeholder="{{ $type->field('meta_description.placeholder') }}" value="{{ $form->field('meta_description')->value() }}" />
             {!! $form->field('meta_description')->helpHtml() !!}
         </label>
-        <label class="{{ $form->field('custom_date')->labelClass() }}" for="custom_date">
+        <label class="{{ $form->field('meta_custom_date')->labelClass() }}" for="meta_custom_date">
             {{ $type->field('meta_custom_date.label') }}
-            <input class="input" type="text" id="custom_date" name="{{ $form->field('custom_date')->name() }}" maxlength="255" placeholder="{{ $type->field('custom_date.placeholder') }}" value="{{ $form->field('custom_date')->value() }}" />
-            {!! $form->field('meta_custom_date')->helpHtml() !!}
+            <input type="text" id="custom_date" name="custom_date" placeholder="Click to set a blog date" class="input" value="{{ $form->field('custom_date')->value() }}">
         </label>
     </div>
 </div>
