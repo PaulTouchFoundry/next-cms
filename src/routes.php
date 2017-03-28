@@ -11,6 +11,7 @@ $docController = 'Wearenext\CMS\Controllers\DocsController';
 Route::get('/', [ 'uses' => "{$pageController}@index", 'as' => 'cms.index' ]);
 Route::get('/page', [ 'uses' => "{$pageController}@index", 'as' => 'cms.page.index' ]);
 Route::get('/page/{cmsType}', [ 'uses' => "{$pageController}@view", 'as' => 'cms.page.view' ]);
+Route::get('/page/{cmsType}/preview/{id}', [ 'uses' => "{$pageController}@preview", 'as' => 'cms.page.preview' ]);
 Route::get('/page/{cmsType}/create', [ 'uses' => "{$pageController}@create", 'as' => 'cms.page.create' ]);
 Route::get('/page/{cmsType}/{cmsPage}/edit', [ 'uses' => "{$pageController}@edit", 'as' => 'cms.page.edit' ]);
 Route::post('/page/{cmsType}/create', [ 'uses' => "{$pageController}@save", 'as' => 'cms.page.save' ]);

@@ -95,8 +95,11 @@ class Page extends BaseModel
     public function previewUrl()
     {
         $url = $this->urls()->first();
+
         if (!is_null($url)) {
             return url($url->url);
+        } else {
+            return url($this->type->slug.'/preview/'.$this->id);
         }
     }
     
