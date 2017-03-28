@@ -96,11 +96,11 @@ class Page extends BaseModel
     {
         $url = $this->urls()->first();
 
-        if (!is_null($url)) {
+        if (!is_null($url) && $this->published) {
             return url($url->url);
-        } else {
-            return url($this->type->slug.'/preview/'.$this->id);
         }
+
+        return url($this->type->slug.'/preview/'.$this->id);
     }
     
     public function publishUrl()
