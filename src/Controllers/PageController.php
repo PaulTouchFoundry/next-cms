@@ -80,6 +80,13 @@ class PageController extends BaseController
         ]);
 
         $attributes = $request->all();
+
+        if (array_get($attributes, 'custom_date') === '') {
+            $attributes['custom_date'] = null;
+        } else {
+            $dateTime = $this->setDateTime(array_get($attributes, 'custom_date'));
+            $attributes['custom_date'] = $dateTime;
+        }
         
         $attributes['features'] = $type->features;
 
