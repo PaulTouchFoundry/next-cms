@@ -13,7 +13,7 @@ class AddCustomDateToPagesTable extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->datetime('custom_date')->nullable();
+            $table->datetime('custom_date')->nullable()->default(null);
         });
     }
 
