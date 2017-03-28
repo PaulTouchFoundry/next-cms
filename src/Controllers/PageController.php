@@ -54,9 +54,11 @@ class PageController extends BaseController
     {
         $this->authorize('cms.page_edit');
 
-        $date = new \DateTime($page->custom_date);
+        if ($page->custom_date) {
+            $date = new \DateTime($page->custom_date);
 
-        $page->custom_date = $date->format('Y-m-d');
+            $page->custom_date = $date->format('Y-m-d');
+        }
 
         $form = new Form($page->toArray());
 
