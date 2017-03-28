@@ -27,7 +27,7 @@ class Page extends BaseModel
         'created_at',
         'updated_at',
         'deleted_at',
-        'custom_dates'
+        'custom_date'
     ];
 
     public function type()
