@@ -172,7 +172,13 @@ if (isset($page)) {
         </label>
         <label class="{{ $form->field('meta_custom_date')->labelClass() }}" for="meta_custom_date">
             {{ $type->field('meta_custom_date.label') }}
-            <input type="text" id="custom_date" name="custom_date" placeholder="Click to set a blog date" class="input" value="{{ $form->field('custom_date')->value() }}">
+            <input type="text" id="custom_date" name="custom_date" placeholder="Click to set a blog date" class="input" value="
+                @if($form->field('custom_date')->value())
+                    {!! $form->field('custom_date')->value() !!}
+                @else
+                    {!! $form->field('created_at')->value() !!}
+                @endif
+                ">
         </label>
     </div>
 </div>
