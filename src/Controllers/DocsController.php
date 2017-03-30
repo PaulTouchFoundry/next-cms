@@ -6,6 +6,7 @@ use DirectoryIterator;
 use Carbon\Carbon;
 use ErrorException;
 use Illuminate\Http\Request;
+use Wearenext\CMS\Models\Document;
 
 class DocsController extends BaseController
 {
@@ -15,8 +16,7 @@ class DocsController extends BaseController
         $docPage = true;
         $uploadField = 'doc_upload';
         $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
-
-        $pageDocuments = $this->getPageDocuments($docs);
+        // gonna need a pivot column for product name
 
         return view('cms::doc.view', compact('docs', 'docPage', 'uploadField', 'uploadToken'));
     }
@@ -201,9 +201,13 @@ class DocsController extends BaseController
         fclose($fh);
     }
 
-    protected function getPageDocuments()
+    protected function getFundDocuments($docs)
     {
+        $fundDocuments = FundDocument::all();
+        $docs = [];
+        foreach ($fundDocuments as $FundDocument) {
 
+        }
     }
 
     protected function addDocumentToPage()
