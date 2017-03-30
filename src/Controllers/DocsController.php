@@ -16,6 +16,8 @@ class DocsController extends BaseController
         $uploadField = 'doc_upload';
         $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
 
+        $pageDocuments = $this->getPageDocuments($docs);
+
         return view('cms::doc.view', compact('docs', 'docPage', 'uploadField', 'uploadToken'));
     }
 
@@ -199,8 +201,13 @@ class DocsController extends BaseController
         fclose($fh);
     }
 
-    protected function addToFundPage()
+    protected function getPageDocuments()
     {
-        
+
+    }
+
+    protected function addDocumentToPage()
+    {
+
     }
 }

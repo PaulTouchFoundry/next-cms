@@ -17,10 +17,11 @@ class CreateFundDocumentTable extends Migration
             $table->string('route');
             $table->string('page_name');
             $table->string('product_name');
-            $table->string('file_path');
-            $table->string('file_name');
+            $table->string('file_path')->nullable();
+            $table->string('file_name')->nullable();
             $table->string('file_size')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
