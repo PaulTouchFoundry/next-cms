@@ -14,7 +14,6 @@ class CreateDocumentTable extends Migration
     {
         Schema::create('document', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('product_name');
             $table->string('file_path')->nullable();
             $table->string('file_name')->nullable();
             $table->string('file_size')->nullable();

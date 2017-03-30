@@ -13,6 +13,7 @@ class FundPage extends BaseModel
 
     public function documents()
     {
-        return $this->belongsToMany(FundPage::class, 'fund_page_document', 'fund_page_id', 'document_id');
+        return $this->belongsToMany(FundPage::class, 'fund_page_document', 'fund_page_id', 'document_id')
+                ->withPivot('product_name');
     }
 }

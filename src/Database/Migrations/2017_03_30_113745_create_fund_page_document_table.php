@@ -16,6 +16,7 @@ class CreateFundPageDocumentTable extends Migration
             $table->increments('id');
             $table->integer('fund_page_id')->references('id')->on('fund_page');
             $table->integer('document_id')->references('id')->on('document');
+            $table->string('product_name');
         });
     }
 

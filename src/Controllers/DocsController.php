@@ -17,7 +17,7 @@ class DocsController extends BaseController
         $uploadField = 'doc_upload';
         $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
         // gonna need a pivot column for product name
-
+        $docs = Document::all();
         return view('cms::doc.view', compact('docs', 'docPage', 'uploadField', 'uploadToken'));
     }
 
@@ -139,6 +139,7 @@ class DocsController extends BaseController
 
         $docs = [];
         $dt = new DirectoryIterator(config('cms.docs.store'));
+        $documents = Document::all();
 
         foreach ($dt as $d) {
             if ($d->isFile()) {
@@ -150,7 +151,16 @@ class DocsController extends BaseController
                     'path' => $d->getPathname(),
                     'modified' => Carbon::createFromTimestamp($d->getMTime()),
                 ];
+
+                if (!Document::where('file_name', $d->getFilename())->first()){
+                    Document::create([
+                        'file_name' => $d->getFilename(),
+                        'file_path' => $d->getPathname(),
+                        'file_size' => round($d->getSize() / 1000, 0 , PHP_ROUND_HALF_UP)
+                    ]);
+                }
             }
+
         }
         return $docs;
     }
@@ -201,9 +211,9 @@ class DocsController extends BaseController
         fclose($fh);
     }
 
-    protected function getFundDocuments($docs)
+    protected function getFundDocuments()
     {
-        $fundDocuments = FundDocument::all();
+        $fundDocuments = Document::all();
         $docs = [];
         foreach ($fundDocuments as $FundDocument) {
 
