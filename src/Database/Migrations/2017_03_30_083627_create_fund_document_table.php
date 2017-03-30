@@ -15,6 +15,7 @@ class CreateFundDocumentTable extends Migration
         Schema::create('fund_document', function (Blueprint $table) {
             $table->increments('id');
             $table->string('route');
+            $table->string('page_name');
             $table->string('product_name');
             $table->string('file_path');
             $table->string('file_name');

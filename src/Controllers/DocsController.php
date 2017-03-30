@@ -198,4 +198,9 @@ class DocsController extends BaseController
         
         fclose($fh);
     }
+
+    protected function addToFundPage()
+    {
+        
+    }
 }

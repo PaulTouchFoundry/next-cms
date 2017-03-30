@@ -79,3 +79,5 @@ Route::get('/docs/{id}/view', [ 'uses' => "{$docController}@view", 'as' => 'cms.
 Route::get('/docs/{id}/{hash}/delete', [ 'uses' => "{$docController}@delete", 'as' => 'cms.doc.delete' ]);
 Route::get('/docs/upload', [ 'uses' => "{$docController}@getUpload", 'as' => 'cms.doc.upload' ]);
 Route::post('/docs/upload', [ 'uses' => "{$docController}@postUpload", 'as' => 'cms.doc.upload_post' ]);
+
+Route::post('/docs/add-to-fund-page', [ 'uses' => "{$docController}@addToFundPage", 'as' => 'cms.doc.add_to_fund_page' ]);
