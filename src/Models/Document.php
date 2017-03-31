@@ -12,9 +12,4 @@ class Document extends BaseModel
         'file_name',
         'file_size'
     ];
-
-    // public function fundPages()
-    // {
-    //     return $this->belongsToMany(FundPage::class, 'fund_page_document', 'document_id', 'fund_page_id');
-    // }
 }

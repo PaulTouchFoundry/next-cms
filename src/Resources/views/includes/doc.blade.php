@@ -8,14 +8,14 @@
         <a class="btn btn--bordered btn--small" href="{{ route('cms.doc.delete', compact('id', 'hash')) }}" role="button">@lang('cms::controls.delete')</a>
     </div>
     <div class="card-inner">
-        <form url="docs/add-to-fund-page" method="post">
+        <form action="{{ route('cms.doc.add_to_fund_page') }}" method="post">
             {{ csrf_field() }}
             @foreach($pageProducts as $pp)
                 <label class="label">
                     Page: {{ array_get($pp, 'page_name') }}
                     <br />
                     Section: {{ array_get($pp, 'product_name') }}
-                <input value="{{$doc->id}}" class="input" type="checkbox" name="{{array_get($pp, 'id')}}" @if($doc->id === $pp->document_id) checked @endif>
+                <input value="{{array_get($pp, 'id')}}" class="input" type="checkbox" name="documents[{{$doc->id}}]" @if($doc->id === $pp->document_id) checked @endif>
                 </label>
             @endforeach
             <label class="label">

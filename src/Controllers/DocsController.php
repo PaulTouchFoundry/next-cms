@@ -216,6 +216,30 @@ class DocsController extends BaseController
 
     protected function addDocumentToPage()
     {
-        dd(request()->all());
+        $docs = request()->get('documents');
+
+        foreach ($docs as $key => $value) {
+            //detach the specific document from pages
+            $pages = FundPage::where('document_id', $key)->get();
+
+            foreach ($pages as $page) {
+                $page->document_id = null;
+                $page->save;
+            }
+            
+            $fundPage = FundPage::find($value);
+            $fundPage->document_id = $key;
+            $fundPage->save();
+        }
+
+        // foreach ($pages as $key => $value) {
+        //     //remove documents first
+
+        //     $fundPage = FundPage::find($key);
+        //     $fundPage->document_id = $value;
+        //     $fundPage->save();
+        // }
+
+        return redirect()->route('cms.doc.index');
     }
 }

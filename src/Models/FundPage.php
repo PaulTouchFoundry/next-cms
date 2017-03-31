@@ -10,9 +10,4 @@ class FundPage extends BaseModel
         'route',
         'page_name'
     ];
-
-    // public function documents()
-    // {
-    //     return $this->belongsToMany(FundPage::class, 'fund_page_document', 'fund_page_id', 'document_id');
-    // }
 }
