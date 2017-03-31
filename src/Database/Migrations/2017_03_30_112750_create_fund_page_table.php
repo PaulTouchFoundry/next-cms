@@ -17,6 +17,7 @@ class CreateFundPageTable extends Migration
             $table->string('route');
             $table->string('page_name');
             $table->string('product_name');
+            $table->integer('document_id')->references('id')->on('document')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
