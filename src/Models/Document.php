@@ -13,9 +13,8 @@ class Document extends BaseModel
         'file_size'
     ];
 
-    public function fundPages()
-    {
-        return $this->belongsToMany(FundPage::class, 'fund_page_document', 'document_id', 'fund_page_id')
-                    ->withPivot('product_name');
-    }
+    // public function fundPages()
+    // {
+    //     return $this->belongsToMany(FundPage::class, 'fund_page_document', 'document_id', 'fund_page_id');
+    // }
 }

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use ErrorException;
 use Illuminate\Http\Request;
 use Wearenext\CMS\Models\Document;
+use Wearenext\CMS\Models\FundPage;
 
 class DocsController extends BaseController
 {
@@ -18,7 +19,9 @@ class DocsController extends BaseController
         $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
         // gonna need a pivot column for product name
         $docs = Document::all();
-        return view('cms::doc.view', compact('docs', 'docPage', 'uploadField', 'uploadToken'));
+        $pageProducts = FundPage::all();
+
+        return view('cms::doc.view', compact('docs', 'docPage', 'uploadField', 'uploadToken', 'pageProducts'));
     }
 
     public function view($id)
@@ -211,17 +214,8 @@ class DocsController extends BaseController
         fclose($fh);
     }
 
-    protected function getFundDocuments()
-    {
-        $fundDocuments = Document::all();
-        $docs = [];
-        foreach ($fundDocuments as $FundDocument) {
-
-        }
-    }
-
     protected function addDocumentToPage()
     {
-
+        dd(request()->all());
     }
 }
