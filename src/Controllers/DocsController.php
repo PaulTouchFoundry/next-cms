@@ -17,7 +17,6 @@ class DocsController extends BaseController
         $docPage = true;
         $uploadField = 'doc_upload';
         $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
-        // gonna need a pivot column for product name
         $docs = Document::all();
         $pageProducts = FundPage::all();
 

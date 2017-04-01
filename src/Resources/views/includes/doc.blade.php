@@ -10,13 +10,13 @@
     <div class="card-inner">
         <form action="{{ route('cms.doc.add_to_fund_page') }}" method="post">
             {{ csrf_field() }}
+            <input type="hidden" value="{{$doc->id}}" name="document_id"/>
             @foreach($pageProducts as $pp)
                 <label class="label">
                     Page: {{ array_get($pp, 'page_name') }}
                     <br />
                     Section: {{ array_get($pp, 'product_name') }}
                     <input value="{{$doc->id}}" class="input" type="checkbox" name="fund_pages[{{array_get($pp, 'id')}}]" @if($doc->id === $pp->document_id) checked @endif>
-                    <input type="hidden" value="{{$doc->id}}" name="document_id"/>
                 </label>
             @endforeach
             <label class="label">
