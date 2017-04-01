@@ -15,7 +15,8 @@
                     Page: {{ array_get($pp, 'page_name') }}
                     <br />
                     Section: {{ array_get($pp, 'product_name') }}
-                <input value="{{array_get($pp, 'id')}}" class="input" type="checkbox" name="documents[{{$doc->id}}]" @if($doc->id === $pp->document_id) checked @endif>
+                    <input value="{{$doc->id}}" class="input" type="checkbox" name="fund_pages[{{array_get($pp, 'id')}}]" @if($doc->id === $pp->document_id) checked @endif>
+                    <input type="hidden" value="{{$doc->id}}" name="document_id"/>
                 </label>
             @endforeach
             <label class="label">

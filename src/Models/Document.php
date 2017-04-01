@@ -12,4 +12,9 @@ class Document extends BaseModel
         'file_name',
         'file_size'
     ];
+
+    public function fundPage()
+    {
+        return $this->hasOne(Wearenext\CMS\Models\FundPage::class);
+    }
 }

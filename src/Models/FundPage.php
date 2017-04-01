@@ -10,4 +10,9 @@ class FundPage extends BaseModel
         'route',
         'page_name'
     ];
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class);
+    }
 }

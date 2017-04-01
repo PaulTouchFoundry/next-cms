@@ -146,19 +146,22 @@ class DocsController extends BaseController
 
         foreach ($dt as $d) {
             if ($d->isFile()) {
+                $path = $d->getPathname();
+                $path = substr($path, strpos($path, '/assets') +1);
+
                 $docs[] = [
                     'id' => count($docs),
                     'name' => $d->getFilename(),
                     'hash' => md5($d->getFilename()),
                     'filename' => $d->getFilename(),
-                    'path' => $d->getPathname(),
+                    'path' => '/' . $path,
                     'modified' => Carbon::createFromTimestamp($d->getMTime()),
                 ];
 
                 if (!Document::where('file_name', $d->getFilename())->first()){
                     Document::create([
                         'file_name' => $d->getFilename(),
-                        'file_path' => $d->getPathname(),
+                        'file_path' => $path,
                         'file_size' => round($d->getSize() / 1000, 0 , PHP_ROUND_HALF_UP)
                     ]);
                 }
@@ -216,29 +219,34 @@ class DocsController extends BaseController
 
     protected function addDocumentToPage()
     {
-        $docs = request()->get('documents');
+        $documentId = request()->get('document_id');
+        $pages = request()->get('fund_pages');
 
-        foreach ($docs as $key => $value) {
-            //detach the specific document from pages
-            $pages = FundPage::where('document_id', $key)->get();
+        if (!$pages) {
+            $fundPages = FundPage::where('document_id', $documentId)->get();
 
-            foreach ($pages as $page) {
+            foreach ($fundPages as $page) {
                 $page->document_id = null;
-                $page->save;
+                $page->save();
             }
-            
-            $fundPage = FundPage::find($value);
-            $fundPage->document_id = $key;
-            $fundPage->save();
+
+            return redirect()->route('cms.doc.index');
+        }
+        foreach ($pages as $page => $document) {
+            //detach the specific document from pages
+            $detach = FundPage::where('document_id', $document)->get();
+            foreach ($detach as $p) {
+                $p->document_id = null;
+                $p->save();
+            }
         }
 
-        // foreach ($pages as $key => $value) {
-        //     //remove documents first
-
-        //     $fundPage = FundPage::find($key);
-        //     $fundPage->document_id = $value;
-        //     $fundPage->save();
-        // }
+        foreach ($pages as $page => $document) {
+            //remove documents first
+            $fundPage = FundPage::find($page);
+            $fundPage->document_id = (integer)$document;
+            $fundPage->save();
+        }
 
         return redirect()->route('cms.doc.index');
     }
