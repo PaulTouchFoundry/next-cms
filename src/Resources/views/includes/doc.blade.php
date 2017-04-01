@@ -7,7 +7,7 @@
         </a>
         <a class="btn btn--bordered btn--small" href="{{ route('cms.doc.delete', compact('id', 'hash')) }}" role="button">@lang('cms::controls.delete')</a>
     </div>
-    <div class="card-inner">
+    <div class="card-inner document" id={{ "document-".$doc->id }}>
         <form action="{{ route('cms.doc.add_to_fund_page') }}" method="post">
             {{ csrf_field() }}
             <input type="hidden" value="{{$doc->id}}" name="document_id"/>
