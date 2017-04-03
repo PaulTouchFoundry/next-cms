@@ -117,8 +117,11 @@ class DocsController extends BaseController
             $path = rtrim($path);
 
             if (request()->get('overwrite') === '1') {
-                $deleteDoc = Document::where('file_name', $filename)->first();
-                $deleteDoc->delete();
+                $overwriteDoc = Document::where('file_name', $filename)->first();
+                $overwriteDoc->file_name = $filename;
+                $overwriteDoc->file_path = $path.'/'.$filename;
+                $overwriteDoc->file_size = round($totalSize / 1000, 0 , PHP_ROUND_HALF_UP);
+
             }
 
             $document = Document::create([
@@ -129,6 +132,7 @@ class DocsController extends BaseController
 
             $fundPage = FundPage::find(request()->get('productId'));
             $fundPage->document_id = $document->id;
+            $fundPage->save();
 
             back()->withErrors(['success' => ['File uploaded']]);
 
