@@ -111,9 +111,27 @@ class DocsController extends BaseController
         if ($total >= $totalSize) {
             $token->put('success', true);
             $this->saveFile($token);
-            
+            // \Log::info(request()->all());
+            $path = config('cms.docs.store');
+            $path = substr($path, strpos($path, '/assets') +1);
+            $path = rtrim($path);
+
+            if (request()->get('overwrite') === 1) {
+                $deleteDoc = Documment::where('file_name', $filename)->first();
+                $deleteDoc->delete();
+            }
+
+            $document = Document::create([
+                'file_name' => $filename,
+                'file_path' => $path.'/'.$filename,
+                'file_size' => round($totalSize / 1000, 0 , PHP_ROUND_HALF_UP)
+            ]);
+
+            $fundPage = FundPage::find(request()->get('productId'));
+            $fundPage->document_id = $document->id;
+
             back()->withErrors(['success' => ['File uploaded']]);
-            
+
             return response('Ok');
         }
 

@@ -32,8 +32,8 @@
      * Resumable
      * ========================================================================== */
 
-    var uploadButton = function (_target, $btn, uid, token) {
-        var query = { 'token': token, 'uid': uid, '_token': '{{ csrf_token() }}' };
+    var uploadButton = function (_target, $btn, uid, token, productId) {
+        var query = { 'token': token, 'uid': uid, '_token': '{{ csrf_token() }}', 'docLink': true, 'productId': productId};
         var r = new Resumable({
             target: _target,
             query: query,
@@ -89,8 +89,8 @@
             var target = $(ob).data('target');
             var id = $pageProducts[ix].id;
             var token = $(ob).data('token');
-
-            uploadButton(target, $('#product-'+id), id, token);
+            var productId = $(ob).data('product-id');
+            uploadButton(target, $('#product-'+id), id, token, productId);
         });
     }
 })();
