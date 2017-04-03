@@ -255,7 +255,10 @@ class DocsController extends BaseController
         $pageProducts = FundPage::all();
         $docLinkPage = true;
         $uploadField = 'doc_upload';
-        $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
-        return view('cms::doc.link-documents', compact('pageProducts', 'docLinkPage', 'uploadField', 'uploadToken'));
+        foreach ($pageProducts as $product) {
+            $product->token = $this->resetNewCustomerToken($product->id)['key'];
+        }
+        // $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
+        return view('cms::doc.link-documents', compact('pageProducts', 'docLinkPage', 'uploadField'));
     }
 }
