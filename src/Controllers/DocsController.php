@@ -116,8 +116,8 @@ class DocsController extends BaseController
             $path = substr($path, strpos($path, '/assets') +1);
             $path = rtrim($path);
 
-            if (request()->get('overwrite') === 1) {
-                $deleteDoc = Documment::where('file_name', $filename)->first();
+            if (request()->get('overwrite') === '1') {
+                $deleteDoc = Document::where('file_name', $filename)->first();
                 $deleteDoc->delete();
             }
 
