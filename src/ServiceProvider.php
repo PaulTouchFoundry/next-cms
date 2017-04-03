@@ -176,6 +176,8 @@ class ServiceProvider extends BaseProvider
         $gate->define('cms.doc_create', $this->allows(false));
         // Doc Index
         $gate->define('cms.doc_index', $this->allows(false));
+        // Doc Link
+        $gate->define('cms.doc-link.index', $this->allows(false));
     }
     
     protected function allows($author)

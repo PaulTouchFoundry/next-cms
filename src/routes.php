@@ -81,3 +81,5 @@ Route::get('/docs/upload', [ 'uses' => "{$docController}@getUpload", 'as' => 'cm
 Route::post('/docs/upload', [ 'uses' => "{$docController}@postUpload", 'as' => 'cms.doc.upload_post' ]);
 
 Route::post('/docs/add-to-fund-page', [ 'uses' => "{$docController}@addDocumentToPage", 'as' => 'cms.doc.add_to_fund_page' ]);
+Route::get('/link-docs', [ 'uses' => "{$docController}@linkDocs", 'as' => 'cms.doc-link.index' ]);
+

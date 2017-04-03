@@ -16,6 +16,11 @@
                 <li{!! (isset($docPage)?' class="is-active"':'') !!}><a href="{{ route('cms.doc.index') }}">Docs</a></li>
                 @endunless
             @endcan
+            @can('cms.doc-link.index')
+                @unless (is_null(config('cms.docs.store')))
+                <li{!! (isset($docLinkPage)?' class="is-active"':'') !!}><a href="{{ route('cms.doc-link.index') }}">Link Documents</a></li>
+                @endunless
+            @endcan
         </ol>
         <ol class="list list--utils">
             @can('cms.user_edit')

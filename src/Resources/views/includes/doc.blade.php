@@ -7,21 +7,4 @@
         </a>
         <a class="btn btn--bordered btn--small" href="{{ route('cms.doc.delete', compact('id', 'hash')) }}" role="button">@lang('cms::controls.delete')</a>
     </div>
-    <div class="card-inner document" id={{ "document-".$doc->id }}>
-        <form action="{{ route('cms.doc.add_to_fund_page') }}" method="post">
-            {{ csrf_field() }}
-            <input type="hidden" value="{{$doc->id}}" name="document_id"/>
-            @foreach($pageProducts as $pp)
-                <label class="label">
-                    Page: {{ array_get($pp, 'page_name') }}
-                    <br />
-                    Section: {{ array_get($pp, 'product_name') }}
-                    <input value="{{$doc->id}}" class="input" type="checkbox" name="fund_pages[{{array_get($pp, 'id')}}]" @if($doc->id === $pp->document_id) checked @endif>
-                </label>
-            @endforeach
-            <label class="label">
-                <input class="btn" type="submit" name="submit" value="Submit" />
-            </label>
-        </form>
-    </div>
 </div>

@@ -883,12 +883,6 @@ SITENAME = {
                 
                 $('.js-table-resize').click(update);
             });
-
-            /* ==========================================================================
-             Hiding and showing Document page options
-             ========================================================================== */
-             $('.document').style('display: none;');
-             console.log("asdasdasdas");
         }
     },
 

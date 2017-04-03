@@ -249,4 +249,13 @@ class DocsController extends BaseController
 
         return redirect()->route('cms.doc.index');
     }
+
+    public function linkDocs()
+    {
+        $pageProducts = FundPage::all();
+        $docLinkPage = true;
+        $uploadField = 'doc_upload';
+        $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
+        return view('cms::doc.link-documents', compact('pageProducts', 'docLinkPage', 'uploadField', 'uploadToken'));
+    }
 }
