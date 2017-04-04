@@ -17,7 +17,6 @@ class DocsController extends BaseController
         $docPage = true;
         $uploadField = 'doc_upload';
         $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
-        $docs = Document::all();
         $pageProducts = FundPage::all();
 
         return view('cms::doc.view', compact('docs', 'docPage', 'uploadField', 'uploadToken', 'pageProducts'));
@@ -111,24 +110,25 @@ class DocsController extends BaseController
         if ($total >= $totalSize) {
             $token->put('success', true);
             $this->saveFile($token);
-            // \Log::info(request()->all());
+
             $path = config('cms.docs.store');
             $path = substr($path, strpos($path, '/assets') +1);
             $path = rtrim($path);
 
+            //if file is overwritten then update the record in the db
             if (request()->get('overwrite') === '1') {
-                $overwriteDoc = Document::where('file_name', $filename)->first();
-                $overwriteDoc->file_name = $filename;
-                $overwriteDoc->file_path = $path.'/'.$filename;
-                $overwriteDoc->file_size = round($totalSize / 1000, 0 , PHP_ROUND_HALF_UP);
-
+                $document = Document::where('file_name', $filename)->first();
+                $document->file_name = $filename;
+                $document->file_path = $path.'/'.$filename;
+                $document->file_size = round($totalSize / 1000, 0 , PHP_ROUND_HALF_UP);
+                $document->save();
+            } else {
+                $document = Document::create([
+                    'file_name' => $filename,
+                    'file_path' => $path.'/'.$filename,
+                    'file_size' => round($totalSize / 1000, 0 , PHP_ROUND_HALF_UP)
+                ]);
             }
-
-            $document = Document::create([
-                'file_name' => $filename,
-                'file_path' => $path.'/'.$filename,
-                'file_size' => round($totalSize / 1000, 0 , PHP_ROUND_HALF_UP)
-            ]);
 
             $fundPage = FundPage::find(request()->get('productId'));
             $fundPage->document_id = $document->id;
@@ -170,22 +170,24 @@ class DocsController extends BaseController
                 $path = $d->getPathname();
                 $path = substr($path, strpos($path, '/assets') +1);
 
-                $docs[] = [
-                    'id' => count($docs),
-                    'name' => $d->getFilename(),
-                    'hash' => md5($d->getFilename()),
-                    'filename' => $d->getFilename(),
-                    'path' => '/' . $path,
-                    'modified' => Carbon::createFromTimestamp($d->getMTime()),
-                ];
+                $document = Document::where('file_name', $d->getFilename())->first();
 
-                if (!Document::where('file_name', $d->getFilename())->first()){
+                if (!$document) {
                     Document::create([
                         'file_name' => $d->getFilename(),
                         'file_path' => $path,
                         'file_size' => round($d->getSize() / 1000, 0 , PHP_ROUND_HALF_UP)
                     ]);
                 }
+
+                $docs[] = [
+                    'id' => $document->id,
+                    'name' => $document->file_name,
+                    'hash' => md5($document->file_name),
+                    'filename' => $document->file_name,
+                    'path' => '/' . $path,
+                    'modified' => Carbon::createFromTimestamp($d->getMTime()),
+                ];
             }
 
         }
@@ -278,9 +280,9 @@ class DocsController extends BaseController
         $docLinkPage = true;
         $uploadField = 'doc_upload';
         foreach ($pageProducts as $product) {
+            $product->document->hash = md5($product->document->file_name);
             $product->token = $this->resetNewCustomerToken($product->id)['key'];
         }
-        // $uploadToken = $this->resetNewCustomerToken($uploadField)['key'];
         return view('cms::doc.link-documents', compact('pageProducts', 'docLinkPage', 'uploadField'));
     }
 }

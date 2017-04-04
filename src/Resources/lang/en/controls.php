@@ -8,4 +8,5 @@ return [
     'unpublish' => 'Unpublish',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
+    'delete_document' => 'Delete Document',
 ];
