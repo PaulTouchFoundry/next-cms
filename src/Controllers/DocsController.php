@@ -35,28 +35,31 @@ class DocsController extends BaseController
 
     public function delete($id, $hash)
     {
-        $docs = $this->getDocs();
+        $document = Document::find($id);
 
-        if (!isset($docs[$id])) {
+        if (!$document) {
             abort(404);
         }
-        
-        if ($docs[$id]['hash'] != $hash) {
-            abort(404);
-        }
-        
-        $filename = config('cms.docs.store') . "/{$docs[$id]['filename']}";
-        
+
+        $filename = config('cms.docs.store') . "/{$document->file_name}";
+
         if (file_exists($filename)) {
+            $document->delete();
+            $fundPages = FundPage::where('document_id', $document->id)->get();
+            foreach ($fundPages as $fundPage) {
+                $fundPage->document_id = null;
+                $fundPage->save();
+            }
             unlink($filename);
         }
-        
-        return back()->withErrors(['success' => ["File {$docs[$id]['name']} deleted"]]);
+
+        return back()->withErrors(['success' => ["File {$document->file_name} deleted"]]);
     }
 
     public function postUpload(Request $request)
     {
         $token = $this->getNewCustomerToken($request->get('uid'), $request->get('token'));
+
         if (is_null($token)) {
             return response('Error uploading file please reload and try again', 500);
         }
@@ -130,9 +133,11 @@ class DocsController extends BaseController
                 ]);
             }
 
-            $fundPage = FundPage::find(request()->get('productId'));
-            $fundPage->document_id = $document->id;
-            $fundPage->save();
+            if ($request->get('productId')) {
+                $fundPage = FundPage::find($request->get('productId'));
+                $fundPage->document_id = $document->id;
+                $fundPage->save();
+            }
 
             back()->withErrors(['success' => ['File uploaded']]);
 
@@ -173,7 +178,7 @@ class DocsController extends BaseController
                 $document = Document::where('file_name', $d->getFilename())->first();
 
                 if (!$document) {
-                    Document::create([
+                    $document = Document::create([
                         'file_name' => $d->getFilename(),
                         'file_path' => $path,
                         'file_size' => round($d->getSize() / 1000, 0 , PHP_ROUND_HALF_UP)
@@ -280,8 +285,10 @@ class DocsController extends BaseController
         $docLinkPage = true;
         $uploadField = 'doc_upload';
         foreach ($pageProducts as $product) {
-            $product->document->hash = md5($product->document->file_name);
             $product->token = $this->resetNewCustomerToken($product->id)['key'];
+            if ($product->document) {
+                $product->document->hash = md5($product->document->file_name);
+            }
         }
         return view('cms::doc.link-documents', compact('pageProducts', 'docLinkPage', 'uploadField'));
     }
