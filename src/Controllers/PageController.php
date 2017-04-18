@@ -87,7 +87,7 @@ class PageController extends BaseController
             $dateTime = $this->setDateTime(array_get($attributes, 'custom_date'));
             $attributes['custom_date'] = $dateTime;
         }
-        
+
         $attributes['features'] = $type->features;
 
         $page = $type->pages()->create($attributes);
@@ -105,7 +105,6 @@ class PageController extends BaseController
     public function update(Request $request, $type, $page)
     {
         $this->authorize('cms.page_edit');
-        
         $this->validate($request, [
             'name' => 'required|string|between:1,255',
             'meta_title' => 'string|between:1,255',
@@ -224,6 +223,11 @@ class PageController extends BaseController
             if (empty($path)) {
                 continue;
             }
+
+            if (substr($path, -1) !== '/') {
+                $path = $path . '/';
+            }
+
             $page->urls()->create(['url' => $path,]);
         }
     }
