@@ -81,7 +81,7 @@ class PageController extends BaseController
 
         $attributes = $request->all();
 
-        if (array_get($attributes, 'custom_date') === '') {
+        if (empty(trim(array_get($attributes, 'custom_date')))) {
             $attributes['custom_date'] = null;
         } else {
             $dateTime = $this->setDateTime(array_get($attributes, 'custom_date'));
@@ -114,7 +114,7 @@ class PageController extends BaseController
 
         $attributes = $request->all();
 
-        if (array_get($attributes, 'custom_date') === '') {
+        if (empty(trim(array_get($attributes, 'custom_date')))) {
             $attributes['custom_date'] = null;
         } else {
             $dateTime = $this->setDateTime(array_get($attributes, 'custom_date'));
