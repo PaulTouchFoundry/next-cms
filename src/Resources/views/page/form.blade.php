@@ -68,6 +68,12 @@
                 <a class="btn btn--small" role="button" href="{{ route('cms.media.edit', ['tag' => 'hero',]) }}?from=page&pagetype_id={{ $type->id }}{{ (isset($page)?'&page_id='.$page->id:'') }}">@lang('cms::page.fields.hero_image.manage')</a>
             </div>
         @endif
+
+@if ($type->hasFeature('featured_article'))
+        <label class="{{ $form->field('featured_article')->labelClass() }} label--checkbox label--inline" for="featured_article">
+            <input type="checkbox" id="featured_article" name="{{ $form->field('featured_article')->name() }}" {!! $form->field('featured_article')->checked() !!}>
+        </label>
+@endif
     </div>
 </div>
 
