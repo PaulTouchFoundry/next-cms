@@ -69,11 +69,6 @@
             </div>
         @endif
 
-@if ($type->hasFeature('featured_article'))
-        <label class="{{ $form->field('featured_article')->labelClass() }} label--checkbox label--inline" for="featured_article">
-            <input type="checkbox" id="featured_article" name="{{ $form->field('featured_article')->name() }}" {!! $form->field('featured_article')->checked() !!}>
-        </label>
-@endif
     </div>
 </div>
 
@@ -186,6 +181,12 @@ if (isset($page)) {
                 @endif
                 ">
         </label>
+
+@if ($type->hasFeature('featured_article'))
+        <label class="{{ $form->field('featured_article')->labelClass() }} label--checkbox label--inline" for="featured_article">
+            <input type="checkbox" id="featured_article" name="{{ $form->field('featured_article')->name() }}" {!! $form->field('featured_article')->checked() !!}> @lang('cms::page.fields.featured_article.label')
+        </label>
+@endif
     </div>
 </div>
 
