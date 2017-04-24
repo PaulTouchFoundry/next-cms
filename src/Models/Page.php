@@ -14,14 +14,16 @@ class Page extends BaseModel
         'features',
         'published',
         'published_at',
-        'custom_date'
+        'custom_date',
+        'featured_article',
     ];
-    
+
     protected $casts = [
         'features' => 'array',
         'published' => 'boolean',
+        'featured_article' => 'boolean',
     ];
-    
+
     protected $dates = [
         'published_at',
         'created_at',

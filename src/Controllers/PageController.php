@@ -184,6 +184,13 @@ class PageController extends BaseController
     {
         foreach ($features as $feature) {
             $model = config("cms.features.{$feature}");
+
+            // @todo this need improving
+            if (strpos($model, 'featured_article') !== false) {
+                $page->featured_article = (data_get($attributes, 'featured_article', false) !== false);
+                break;
+            }
+
             if (class_exists($model)) {
                 $m = new $model();
                 $q = $m->whereHas('page', function ($q) use ($page) {
