@@ -36,42 +36,42 @@ class Page extends BaseModel
     {
         return $this->belongsTo(PageType::class, 'page_type_id', 'id');
     }
-    
+
     public function blocks()
     {
         return $this->hasMany(Block::class);
     }
-    
+
     public function block()
     {
         return $this->belongsTo(Block::class, 'starting_block_id', 'id');
     }
-    
+
     public function callouts()
     {
         return $this->hasMany(Callout::class);
     }
-    
+
     public function pageHero()
     {
         return $this->hasOne(Features\Hero::class);
     }
-    
+
     public function pageProduct()
     {
         return $this->hasOne(Features\Product::class);
     }
-    
+
     public function pageKeyFeatures()
     {
         return $this->hasOne(Features\KeyFeatures::class);
     }
-    
+
     public function urls()
     {
         return $this->hasMany(Url::class);
     }
-    
+
     public function resolveSummary($limit = 100, $end = '...', $default = 'No synopsis available')
     {
         foreach ($this->getBlockGenerator() as $block) {
@@ -93,7 +93,7 @@ class Page extends BaseModel
             yield $block;
         }
     }
-    
+
     public function previewUrl()
     {
         $url = $this->urls()->first();
@@ -104,13 +104,13 @@ class Page extends BaseModel
 
         return url($this->type->slug.'/preview/'.$this->id);
     }
-    
+
     public function publishUrl()
     {
         $type = $this->type;
         return route('cms.page.publish', [ 'cmsType' => $type->slug, 'cmsPage' => $this ]);
     }
-    
+
     public function unpublishUrl()
     {
         $type = $this->type;
@@ -122,7 +122,7 @@ class Page extends BaseModel
         $type = $this->type;
         return route('cms.page.edit', [ 'cmsType' => $type->slug, 'cmsPage' => $this ]);
     }
-    
+
     public function setPublishAttribute($value)
     {
         if ($value == 1) {
@@ -136,7 +136,7 @@ class Page extends BaseModel
         $type = $this->type;
         return route('cms.block.index', [ 'cmsType' => $type->slug, 'cmsPage' => $this ]);
     }
-    
+
     public function relatedPages()
     {
         return $this->hasMany(PageRelation::class);

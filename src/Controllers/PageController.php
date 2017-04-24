@@ -14,7 +14,7 @@ class PageController extends BaseController
     public function index(Request $request)
     {
         $this->authorize('cms.page_index');
-        
+
         $type = PageType::all()->first();
         if (!is_null($type)) {
             return redirect()->to($type->pageUrl());
@@ -22,33 +22,33 @@ class PageController extends BaseController
         return redirect()
             ->route('cms.pagetype.create');
     }
-    
+
     public function view(Request $request, $type)
     {
         $this->authorize('cms.page_view');
-        
+
         $query = $type->pages();
         if (!empty($searchQuery = $request->get('q', ''))) {
             $query->where('name', 'LIKE', "%{$searchQuery}%");
         }
         $query->orderBy('updated_at', 'DESC');
-        
+
         return view('cms::page.view')
             ->with('type', $type)
             ->with('pages', $query->paginate());
     }
-    
+
     public function create(Request $request, $type)
     {
         $this->authorize('cms.page_create');
-        
+
         $form = new Form;
         return view('cms::page.create')
             ->with('type', $type)
             ->with('form', $form)
             ->with('relations', $this->relations($type));
     }
-    
+
     public function edit(Request $request, $type, $page)
     {
         $this->authorize('cms.page_edit');
@@ -71,7 +71,7 @@ class PageController extends BaseController
     public function save(Request $request, $type)
     {
         $this->authorize('cms.page_create');
-        
+
         $this->validate($request, [
             'name' => 'required|string|between:1,255',
             'meta_title' => 'string|between:1,255',
@@ -101,7 +101,7 @@ class PageController extends BaseController
             ->to($page->blockUrl())
             ->withErrors([ 'success' => [ trans('cms::page.messages.saved', [ 'name' => $page->name, ]) ] ]);
     }
-    
+
     public function update(Request $request, $type, $page)
     {
         $this->authorize('cms.page_edit');
@@ -128,7 +128,7 @@ class PageController extends BaseController
         $this->fillFeatures(array_keys($type->features), $page, $attributes);
 
         $this->paths(array_values($request->get('paths', [])), $page);
-        
+
         $page->relatedPages()->forceDelete();
         $this->saveRelations($request->get('related_page', []), $page);
 
@@ -138,11 +138,11 @@ class PageController extends BaseController
             ->to($request->has('next')?$page->blockUrl():$type->pageUrl())
             ->withErrors([ 'success' => [ trans('cms::page.messages.updated', [ 'name' => $page->name, ]) ] ]);
     }
-    
+
     public function delete(Request $request, $type, $page)
     {
         $this->authorize('cms.page_destroy');
-        
+
         $page->delete();
         return redirect()
             ->to($type->pageUrl())
@@ -152,7 +152,7 @@ class PageController extends BaseController
     public function publish($type, $page)
     {
         $this->authorize('cms.page_publish');
-        
+
         $page->published_at = Carbon::now();
         $page->published = true;
         $page->save();
@@ -168,7 +168,7 @@ class PageController extends BaseController
     public function unpublish($type, $page)
     {
         $this->authorize('cms.page_unpublish');
-        
+
         $page->published = false;
         $page->save();
 
@@ -238,7 +238,7 @@ class PageController extends BaseController
             $page->urls()->create(['url' => $path,]);
         }
     }
-    
+
     protected function saveRelations($relations, Page $page)
     {
         foreach ($relations as $relation) {
@@ -249,25 +249,25 @@ class PageController extends BaseController
             }
         }
     }
-    
+
     protected function relations(PageType $type, Page $page = null)
     {
         $relations = [];
         $pageType = [];
-        
+
         foreach ($type->relations as $rid => $r) {
             $relatedType = PageType::with('pages')->find($r['pagetype_id']);
             $pages = [];
-            
+
             foreach ($relatedType->pages as $p) {
                 $pages[$p->id] = [
                     'name' => $p->name,
                     'selected' => false,
                 ];
             }
-            
+
             $pageType["{$rid}-{$r['pagetype_id']}"] = count($relations);
-            
+
             $relations[] = [
                 'relation_id' => $rid,
                 'pagetype_id' => $r['pagetype_id'],
@@ -275,24 +275,24 @@ class PageController extends BaseController
                 'pages' => $pages,
             ];
         }
-        
+
         if (is_null($page)) {
             return $relations;
         }
-        
+
         foreach ($page->relatedPages as $p) {
             $key = "{$p->relation_id}-{$p->related_pagetype_id}";
             if (!isset($pageType[$key])) {
                 continue;
             }
-            
+
             $rid = $pageType[$key];
-            
+
             if (isset($relations[$rid]['pages'][$p->related_page_id])) {
                 $relations[$rid]['pages'][$p->related_page_id]['selected'] = true;
             }
         }
-        
+
         return $relations;
     }
 }

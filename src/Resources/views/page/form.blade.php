@@ -103,7 +103,7 @@
                 $features = $features->key_features;
             }
         }
-        
+
         if (!is_array($features)) {
             $features = [];
         }

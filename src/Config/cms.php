@@ -27,14 +27,14 @@ return [
         ],
         'default' => [],
     ],
-    
+
     'cloudinary' => [
         'store' => null,
         'thumb_store' => null,
         'resource' => null,
         'resource_thumb' => null,
     ],
-    
+
     'docs' => [
         'path' => null,
         'resource' => null,
