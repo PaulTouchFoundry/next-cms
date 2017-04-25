@@ -88,6 +88,16 @@
 
         <br>
         @endforeach
+
+@if ($type->hasFeature('featured_article'))
+        <fieldset class="fieldset fieldset--bordered">
+            <legend class="legend">Featured</legend>
+
+            <label class="{{ $form->field('featured_article')->labelClass() }} label--checkbox label--inline" for="featured_article">
+                <input type="checkbox" id="featured_article" name="{{ $form->field('featured_article')->name() }}" {!! $form->field('featured_article')->checked() !!}> @lang('cms::page.fields.featured_article.label')
+            </label>
+        </fieldset>
+@endif
     </div>
 </div>
 @endunless
@@ -181,12 +191,6 @@ if (isset($page)) {
                 @endif
                 ">
         </label>
-
-@if ($type->hasFeature('featured_article'))
-        <label class="{{ $form->field('featured_article')->labelClass() }} label--checkbox label--inline" for="featured_article">
-            <input type="checkbox" id="featured_article" name="{{ $form->field('featured_article')->name() }}" {!! $form->field('featured_article')->checked() !!}> @lang('cms::page.fields.featured_article.label')
-        </label>
-@endif
     </div>
 </div>
 
