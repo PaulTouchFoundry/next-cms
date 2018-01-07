@@ -185,7 +185,7 @@ class DocsController extends BaseController
                     ]);
                 }
 
-                $docs[] = [
+                $docs[$document->id] = [
                     'id' => $document->id,
                     'name' => $document->file_name,
                     'hash' => md5($document->file_name),
